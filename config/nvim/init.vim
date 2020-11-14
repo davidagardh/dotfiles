@@ -1,4 +1,7 @@
 call plug#begin(stdpath('data') . '/plugged')
+" Basics
+Plug 'roy2220/easyjump.tmux'
+Plug 'tpope/vim-surround'
 " Search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -76,6 +79,7 @@ set shortmess+=c
 
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 let g:completion_matching_ignore_case = 1
+let g:completion_enable_auto_paren = 1
 
 let g:completion_enable_snippet = 'Neosnippet'
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}
