@@ -18,7 +18,7 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Git
 Plug 'tpope/vim-fugitive'
-"Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 " Looks and niceties
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
