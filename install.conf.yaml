@@ -26,5 +26,5 @@
     ~/.p10k.zsh:
     ~/.zprofile:
     ~/.gitconfig:
-    ~/.config/nvim/: config/nvim/*
+    ~/.config/nvim: config/nvim
 
