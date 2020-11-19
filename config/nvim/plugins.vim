@@ -2,6 +2,8 @@ call plug#begin(stdpath('data') . '/plugged')
 " Basics
 Plug 'roy2220/easyjump.tmux'
 Plug 'tpope/vim-surround'
+Plug 'luochen1990/rainbow'
+Plug 'cohama/lexima.vim'
 " Search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -32,4 +34,7 @@ let g:airline_powerline_fonts = 1
 let g:go_fmt_command = "goimports"
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+
+" Enable and configure rainbow brackets
+let g:rainbow_active = 1
 
