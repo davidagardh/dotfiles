@@ -5,7 +5,7 @@ lua <<EOF
 	nvim_lsp.gopls.setup{on_attach=require'completion'.on_attach}
 	
 	-- Haskell language server
-	require'nvim_lsp'.hls.setup{on_attach=require'completion'.on_attach}
+	--require'nvim_lsp'.hls.setup{on_attach=require'completion'.on_attach}
 
 EOF
 
