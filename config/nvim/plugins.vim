@@ -1,6 +1,5 @@
 call plug#begin(stdpath('data') . '/plugged')
 " Basics
-Plug 'roy2220/easyjump.tmux'
 Plug 'tpope/vim-surround'
 Plug 'luochen1990/rainbow'
 Plug 'cohama/lexima.vim'
@@ -17,6 +16,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'Shougo/neosnippet.vim'
 " Languages
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Git
 Plug 'tpope/vim-fugitive'
@@ -38,14 +38,11 @@ let g:go_info_mode='gopls'
 " Enable and configure rainbow brackets
 let g:rainbow_active = 1
 
-" Neovim LSP configuration
+" Neovim LSP completion configuration
 lua <<EOF
 	local nvim_lsp = require'nvim_lsp'
 	-- GOPLS
 	nvim_lsp.gopls.setup{on_attach=require'completion'.on_attach}
-	
-	-- Haskell language server
-	--require'nvim_lsp'.hls.setup{on_attach=require'completion'.on_attach}
 EOF
 
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
@@ -55,3 +52,15 @@ let g:completion_enable_auto_paren = 1
 let g:completion_enable_snippet = 'Neosnippet'
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}
 
+" Treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+	ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+	highlight = {
+		enable = true,              -- false will disable the whole extension
+	},
+	indent = {
+		enable = true
+	}
+}
+EOF
