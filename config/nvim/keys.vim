@@ -23,5 +23,16 @@ map åt :tabedit
 map åy "+y
 map åp "+p
 
+" Adding lines in normal mode
 nnoremap <Leader>o o<Esc>
 nnoremap <Leader>O O<Esc>
+
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Use <C-k> to do snippet
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
