@@ -40,7 +40,7 @@ let g:rainbow_active = 1
 
 " Neovim LSP completion configuration
 lua <<EOF
-	local nvim_lsp = require'nvim_lsp'
+	local nvim_lsp = require'lspconfig'
 	-- GOPLS
 	nvim_lsp.gopls.setup{on_attach=require'completion'.on_attach}
 EOF
