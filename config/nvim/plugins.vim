@@ -24,11 +24,8 @@ Plug 'airblade/vim-gitgutter'
 " Looks and niceties
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'rafi/awesome-vim-colorschemes'
 call plug#end()
-
-" airline color config
-let g:airline_theme = 'base16_monokai'
-let g:airline_powerline_fonts = 1
 
 " vim-go configuration
 let g:go_fmt_command = "goimports"
