@@ -44,12 +44,9 @@ autocmd FileType python set tabstop=2 tabstop=2 expandtab
 set number
 set relativenumber
 
-"Switch to show absolute line numbers when window not in focus
-augroup numbertoggle
-	autocmd!
-	autocmd BufEnter,FocusGained * set relativenumber
-	autocmd BufLeave,FocusLost   * set norelativenumber
-augroup END
+" Visible tabs
+set listchars=tab:\ 
+"set list
 
 " Misc. Preferences
 set ignorecase
