@@ -80,7 +80,6 @@ plugins=(
 	wd
 	colored-man-pages
 	fzf
-	kate
 	zsh-syntax-highlighting
 )
 
