@@ -57,3 +57,11 @@ set shortmess+=c
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 
+"Switch to show absolute line numbers when window not in focus
+augroup numbertoggle
+	autocmd!
+	autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set relativenumber cursorline
+	autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &number | set norelativenumber | endif
+	autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set nocursorline
+augroup END
+

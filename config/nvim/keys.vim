@@ -5,8 +5,8 @@ nnoremap <M-h>    :vertical resize -2<CR>
 nnoremap <M-l>    :vertical resize +2<CR>
 
 " More scrolling
-nnoremap <C-e> 5<C-e>
-nnoremap <C-y> 5<C-y>
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
 
 " Better window navigation
 nnoremap <C-h> <C-w>h
@@ -62,3 +62,5 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
+" Reload buffer for Treesitter breaking
+nmap <leader><C-r> :write \| edit \| TSBufEnable highlight<CR>
