@@ -132,6 +132,7 @@ export GOPATH=$(go env GOPATH)
 export GOBIN=${GOPATH}/bin/
 export PATH="$GOBIN:$PATH"
 alias nvimconf="nvim ~/.config/nvim/"
+export PATH="$PATH:$HOME/.local/bin"
 
 # To customize prompt, run `p10k configure` or edit ~/.dotfiles/p10k.zsh.
 [[ ! -f ~/.dotfiles/p10k.zsh ]] || source ~/.dotfiles/p10k.zsh
