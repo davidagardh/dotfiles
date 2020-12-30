@@ -4,6 +4,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'luochen1990/rainbow'
 Plug 'cohama/lexima.vim'
+Plug 'lambdalisue/suda.vim'
 " Search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'

@@ -32,8 +32,6 @@ set formatoptions-=cro                  " Stop newline continution of comments
 "set clipboard=unnamedplus               " Copy paste between vim and everything else
 "set autochdir                           " Your working directory will always be the same as your working directory
 
-" You can't stop me (:w!! to write with sudo)
-cmap w!! w !sudo tee %
 " End Chris
 
 " Tab size
