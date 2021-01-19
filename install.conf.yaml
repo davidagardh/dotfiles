@@ -28,5 +28,5 @@
     ~/.zprofile:
     ~/.gitconfig:
     ~/.config/nvim: config/nvim
-    ~/.config/fish/config.fish: config/fish/config.fish
+    ~/.config/fish: config/fish
 
