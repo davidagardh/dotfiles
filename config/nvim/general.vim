@@ -48,6 +48,7 @@ set listchars=tab:\
 
 " Misc. Preferences
 set ignorecase
+set scrolloff=5
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
