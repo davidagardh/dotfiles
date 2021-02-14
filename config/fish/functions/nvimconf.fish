@@ -1,4 +1,4 @@
 function nvimconf
-	cd .config/nvim
+	cd ~/.config/nvim
 	nvim .
 end
