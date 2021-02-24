@@ -1,11 +1,11 @@
+" General
+exe 'source '.stdpath('config').'/general.vim'
+exe 'source '.stdpath('config').'/keys.vim'
+
 if !exists('g:vscode')
-	" Plugin
-	exe 'source '.stdpath('config').'/plugins.vim'
+  " Plugin
+  exe 'source '.stdpath('config').'/plugins.vim'
 
-	" General
-	exe 'source '.stdpath('config').'/general.vim'
-	exe 'source '.stdpath('config').'/keys.vim'
-
-	" Theme
-	exe 'source '.stdpath('config').'/theme.vim'
+  " Theme
+  exe 'source '.stdpath('config').'/theme.vim'
 endif
