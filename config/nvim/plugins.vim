@@ -20,8 +20,6 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'aca/completion-tabnine', { 'do': './install.sh' }
 Plug 'georgewitteman/vim-fish'
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'thosakwe/vim-flutter'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -69,7 +67,6 @@ autocmd FileType go nmap <leader>d <Plug>(go-def)
 lua <<EOF
 require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
 require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
-require'lspconfig'.dartls.setup{on_attach=require'completion'.on_attach}
 EOF
 
 autocmd BufEnter *.lua lua require'completion'.on_attach()
