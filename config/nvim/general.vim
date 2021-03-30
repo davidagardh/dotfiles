@@ -63,3 +63,6 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &number | set norelativenumber | endif
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set nocursorline
 augroup END
+
+autocmd FileType markdown setlocal spell
+autocmd FileType markdown setlocal wrap
