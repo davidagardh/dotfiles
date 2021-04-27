@@ -66,3 +66,7 @@ augroup END
 
 autocmd FileType markdown setlocal spell
 autocmd FileType markdown setlocal wrap
+autocmd FileType markdown nnoremap j gj
+autocmd FileType markdown nnoremap k gk
+autocmd FileType markdown nnoremap _ g0
+autocmd FileType markdown nnoremap $ g$
