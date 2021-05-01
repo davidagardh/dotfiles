@@ -1,0 +1,31 @@
+function alias_if_exists() {
+	# Does the alias only if the aliased program is installed
+	if command -v $2 > /dev/null; then
+		alias "$1"="$2"
+	fi
+}
+
+# Shortcuts
+alias cl="clear"
+alias l="ls -l"
+alias la="ls -lA"
+
+# Git
+alias gs="git status"
+alias gu="git pull"
+alias gsu="git stash && git pull && git stash pop"
+
+# youtube-dl
+alias yt=youtube-dl
+alias ytmp3="youtube-dl --extract-audio --audio-format mp3"
+
+# toolbox
+alias te="toolbox enter"
+alias tr="toolbox run"
+alias tdnf="toolbox run dnf"
+
+mvr() {
+	# Reverse mv
+	mv $2 $1
+}
+

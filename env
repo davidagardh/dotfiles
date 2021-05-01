@@ -1,0 +1,20 @@
+# shellcheck shell=bash
+# .env
+# Environment variables used across shells
+
+if command -v go > /dev/null ; then
+    export GOPATH=$(go env GOPATH)
+    export GOBIN=$GOPATH/bin
+	PATH=$GOBIN:$PATH
+fi
+
+# opt PATH
+if ! [[ "$PATH" == *"/opt/bin:"* ]]; then
+    PATH="/opt/bin:$PATH"
+fi
+# local PATH
+if ! [[ "$PATH" == *"$HOME/.local/bin:$HOME/bin:"* ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+
+export PATH
