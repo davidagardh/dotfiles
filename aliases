@@ -14,6 +14,9 @@ alias la="ls -lA"
 alias gs="git status"
 alias gu="git pull"
 alias gsu="git stash && git pull && git stash pop"
+alias gd="git diff"
+alias ga="git add"
+alias gcm="git commit -m"
 
 # youtube-dl
 alias yt=youtube-dl
