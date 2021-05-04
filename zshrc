@@ -17,6 +17,10 @@ if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
+if [ -f ~/.secrets ]; then
+	source ~/.secrets
+fi
+
 setopt autocd # cd by just the name of directory
 
 # History
