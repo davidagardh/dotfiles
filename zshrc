@@ -9,8 +9,12 @@ fi
 autoload -U colors && colors
 
 # Source global definitions
+if [ -f /etc/zshrc ]; then
+    source /etc/zshrc
+fi
+
 if [ -f ~/.env  ]; then
-	source ~/.env
+    source ~/.env
 fi
 
 if [ -f ~/.aliases ]; then
