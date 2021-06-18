@@ -20,6 +20,7 @@ alias gd="git diff"
 alias ga="git add"
 alias gcm="git commit -m"
 alias gp="git push"
+alias gsw="git switch"
 
 # youtube-dl
 alias yt=youtube-dl
@@ -29,7 +30,7 @@ alias ytmp3="youtube-dl --extract-audio --audio-format mp3"
 alias te="toolbox enter"
 alias tr="toolbox run"
 alias tdnf="toolbox run dnf"
-alias nvim="toolbox run nvim"
+alias tnvim="toolbox run nvim"
 
 mvr() {
 	# Reverse mv
