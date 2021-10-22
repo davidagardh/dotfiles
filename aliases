@@ -37,3 +37,10 @@ mvr() {
 	mv $2 $1
 }
 
+sysupgrade() {
+	rpm-ostree upgrade
+	flatpak upgrade -y
+	tr sudo dnf upgrade -y
+	tr -c hacking sudo dnf upgrade -y
+}
+
