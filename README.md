@@ -4,7 +4,7 @@ My configuration files for linux systems.
 
 ## ZSH
 
-I use [antigen](https://github.com/zsh-users/antigen) for a very few plugins. The theme is [p10k](https://github.com/romkatv/powerlevel10k). I haven't included p10k config in this repo.
+I use Oh-my-zsh with a few plugins enabled. The theme is [p10k](https://github.com/romkatv/powerlevel10k).
 
 ## Neovim
 
