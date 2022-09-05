@@ -5,6 +5,7 @@ Plug 'tpope/vim-repeat'
 Plug 'luochen1990/rainbow'
 Plug 'cohama/lexima.vim'
 Plug 'lambdalisue/suda.vim'
+Plug 'nvim-lua/plenary.nvim'
 " Search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -15,11 +16,8 @@ Plug 'preservim/nerdtree'
 " Languages
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'aca/completion-tabnine', { 'do': './install.sh' }
-Plug 'georgewitteman/vim-fish'
+Plug 'scalameta/nvim-metals'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -67,19 +65,13 @@ autocmd FileType go nmap <leader>d <Plug>(go-def)
 " completion config
 lua <<EOF
 require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
-require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
+require'lspconfig'.pylsp.setup{on_attach=require'completion'.on_attach}
 EOF
 
 autocmd BufEnter *.lua lua require'completion'.on_attach()
 
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-let g:completion_enable_snippet = 'Neosnippet'
 let g:completion_trigger_character = ['.', ':']
-" Autocomplete / snippets pom mappings
-nmap K :lua vim.lsp.buf.hover()<CR>
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " Snippets
 let g:neosnippet#disable_runtime_snippets = {'go' : 1}
@@ -89,7 +81,7 @@ endif
 
 " Chain completion
 let g:completion_chain_complete_list = [
-  \{'complete_items': ['lsp', 'tabnine', 'snippet']},
+  \{'complete_items': ['lsp', 'snippet']},
   \{'mode': '<c-p>'},
   \{'mode': '<c-n>'}
 \]

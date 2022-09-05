@@ -26,6 +26,16 @@ map åy "+y
 map åp "+p
 map åP "+P
 
+" Snippet shortcuts
+imap <C-k>  <Plug>(deoppet_expand)
+imap <C-f>  <Plug>(deoppet_jump_forward)
+imap <C-b>  <Plug>(deoppet_jump_backward)
+smap <C-f>  <Plug>(deoppet_jump_forward)
+smap <C-b>  <Plug>(deoppet_jump_backward)
+
+" Autocomplete Pop-up-menu
+nmap K :lua vim.lsp.buf.hover()<CR>
+
 " Adding lines in normal mode
 nnoremap <Leader>o o<Esc>
 nnoremap <Leader>O O<Esc>

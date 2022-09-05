@@ -17,4 +17,7 @@ if ! [[ "$PATH" == *"$HOME/.local/bin:$HOME/bin:"* ]]; then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
-export PATH
+export PATH="$PATH:/var/home/david/.local/bin"
+export PATH="$PATH:/var/home/david/.local/share/coursier/bin"
+export PATH="$PATH:/var/home/david/.cache/scalacli/local-repo/bin/scala-cli"
+export PATH=$PATH:/var/home/david/.local/share/coursier/bin
