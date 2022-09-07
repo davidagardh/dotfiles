@@ -6,7 +6,7 @@ My configuration files for Linux systems.
 
 This repo is managed using [chezmoi](https://www.chezmoi.io/). It only depends on git being installed and can be quickly installed using this one-liner
 
-`sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply`
+`sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply the0val`
 
 ## ZSH
 
