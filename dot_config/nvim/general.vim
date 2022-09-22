@@ -70,3 +70,5 @@ autocmd FileType markdown nnoremap j gj
 autocmd FileType markdown nnoremap k gk
 autocmd FileType markdown nnoremap _ g0
 autocmd FileType markdown nnoremap $ g$
+
+autocmd FileType scala setlocal tabstop=2 shiftwidth=2 expandtab
