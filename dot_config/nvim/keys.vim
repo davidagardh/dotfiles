@@ -14,7 +14,8 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 " exit terminal mode
-tnoremap <C-+><C-n> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
+tmap <C-k> <C-\><C-n><C-k>
 
 " Tabbing keeps visual selection
 vnoremap < <gv
