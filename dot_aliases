@@ -19,7 +19,7 @@ alias gsu="git stash && git pull && git stash pop"
 alias gd="git diff"
 alias ga="git add"
 alias gcm="git commit -m"
-alias gp="git push"
+alias gp="git pull && git push"
 alias gsw="git switch"
 
 # youtube-dl
