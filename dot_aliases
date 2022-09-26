@@ -19,6 +19,7 @@ alias gsu="git stash && git pull && git stash pop"
 alias gd="git diff"
 alias ga="git add"
 alias gcm="git commit -m"
+alias gcam="git commit -am"
 alias gp="git pull && git push"
 alias gsw="git switch"
 
