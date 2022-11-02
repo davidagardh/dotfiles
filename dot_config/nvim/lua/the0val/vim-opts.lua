@@ -48,7 +48,6 @@ vo.autochdir = true
 vo.splitbelow = true
 vo.splitright = true
 
-vo.ruler = true
 vo.cursorline = true
 
 vim.g.mapleader = " "
