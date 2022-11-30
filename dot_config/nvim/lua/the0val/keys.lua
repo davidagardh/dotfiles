@@ -40,6 +40,9 @@ m.vnoremap("åp", '"+p')
 m.nnoremap("<Leader>o", "o<Esc>")
 m.nnoremap("<Leader>O", "O<Esc>")
 
+m.nnoremap("<Leader>f", "<cmd>NvimTreeToggle<CR>")
+
+-- For language server and such
 local bufopts = { noremap=true, silent=true, buffer=bufnr }
 m.nnoremap("gD", vim.lsp.buf.declaration)
 m.nnoremap("gd", vim.lsp.buf.definition)
@@ -47,8 +50,17 @@ m.nnoremap("K", vim.lsp.buf.hover)
 m.nnoremap("gi", vim.lsp.buf.implementation)
 m.nnoremap("gr", vim.lsp.buf.references)
 --m.nnoremap("<C-k>", vim.lsp.buf.signature_help)
-m.nnoremap("<leader>cl", vim.lsp.codelens.run)
-m.nnoremap("<leader>D", vim.lsp.buf.type_definition)
-m.nnoremap("<leader>rn", vim.lsp.buf.rename)
-m.nnoremap("<leader>ca", vim.lsp.buf.code_action)
-m.nnoremap("<leader>F", function() vim.lsp.buf.format { async = true } end)
+m.nnoremap("<Leader>cl", vim.lsp.codelens.run)
+m.nnoremap("<Leader>D", vim.lsp.buf.type_definition)
+m.nnoremap("<Leader>rn", vim.lsp.buf.rename)
+m.nnoremap("<Leader>ca", vim.lsp.buf.code_action)
+m.nnoremap("<Leader>F", function() vim.lsp.buf.format { async = true } end)
+
+-- DAP Debugger
+m.nnoremap("<Leader>dt", require"dap".toggle_breakpoint)
+m.nnoremap("<Leader>dc", require"dap".continue)
+m.nnoremap("<Leader>dso", require"dap".stop_over)
+m.nnoremap("<Leader>dsi", require"dap".stop_into)
+m.nnoremap("<Leader>dK", require"dap.ui.widgets".hover)
+m.nnoremap("<Leader>dl", require"dap".run_last)
+m.nnoremap("<Leader>dr", require"dap".repl.toggle)

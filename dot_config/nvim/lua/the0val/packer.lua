@@ -16,6 +16,10 @@ return require("packer").startup(function(use)
 	}
 	-- Basics
 	use "kylechui/nvim-surround"
+	use {
+		"nvim-tree/nvim-tree.lua",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true }
+	}
 
 	-- General IDE-like features
 	use {
