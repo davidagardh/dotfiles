@@ -50,5 +50,3 @@ vo.splitright = true
 
 vo.cursorline = true
 
-vim.g.mapleader = " "
-

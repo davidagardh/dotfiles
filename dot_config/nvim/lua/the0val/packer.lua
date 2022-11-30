@@ -1,11 +1,12 @@
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
-print "Adding packer"
-
 return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use "wbthomason/packer.nvim"
+
+	-- nvim config improvements
+	use "svermeulen/vimpeccable"
 
 	-- Looks
 	use "RRethy/nvim-base16"
@@ -19,8 +20,27 @@ return require("packer").startup(function(use)
 	-- General IDE-like features
 	use {
         "nvim-treesitter/nvim-treesitter",
-        run = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
+        run = function()
+			require("nvim-treesitter.install").update({ with_sync = true })
+		end,
     }
 	use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
 	use "lewis6991/gitsigns.nvim"
+
+	-- Complex language features
+	use {
+		"hrsh7th/nvim-cmp",
+		requires = {
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-vsnip" },
+			{ "hrsh7th/vim-vsnip" },
+		},
+	}
+	use {
+		"scalameta/nvim-metals",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"mfussenegger/nvim-dap",
+		},
+	}
 end)

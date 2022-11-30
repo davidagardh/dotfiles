@@ -1,4 +1,8 @@
-local m = require "the0val.bind"
+local m = require "vimp"
+
+vim.g.mapleader = " "
+m.add_chord_cancellations('n', '<leader>')
+m.always_override = true
 
 -- Easy saving
 m.nnoremap("<C-s>", "<cmd>w<CR>")
@@ -35,3 +39,16 @@ m.vnoremap("åp", '"+p')
 -- Quick adding lines in normal mode
 m.nnoremap("<Leader>o", "o<Esc>")
 m.nnoremap("<Leader>O", "O<Esc>")
+
+local bufopts = { noremap=true, silent=true, buffer=bufnr }
+m.nnoremap("gD", vim.lsp.buf.declaration)
+m.nnoremap("gd", vim.lsp.buf.definition)
+m.nnoremap("K", vim.lsp.buf.hover)
+m.nnoremap("gi", vim.lsp.buf.implementation)
+m.nnoremap("gr", vim.lsp.buf.references)
+--m.nnoremap("<C-k>", vim.lsp.buf.signature_help)
+m.nnoremap("<leader>cl", vim.lsp.codelens.run)
+m.nnoremap("<leader>D", vim.lsp.buf.type_definition)
+m.nnoremap("<leader>rn", vim.lsp.buf.rename)
+m.nnoremap("<leader>ca", vim.lsp.buf.code_action)
+m.nnoremap("<leader>F", function() vim.lsp.buf.format { async = true } end)
