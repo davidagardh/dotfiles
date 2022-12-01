@@ -30,8 +30,8 @@ return require("packer").startup(function(use)
     }
 	use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
 	use "lewis6991/gitsigns.nvim"
-
-	-- Complex language features
+	use "mfussenegger/nvim-dap"
+	use "rcarriga/nvim-dap-ui"
 	use {
 		"hrsh7th/nvim-cmp",
 		requires = {
@@ -40,11 +40,12 @@ return require("packer").startup(function(use)
 			{ "hrsh7th/vim-vsnip" },
 		},
 	}
+
+	-- Language features
 	use {
 		"scalameta/nvim-metals",
 		requires = {
 			"nvim-lua/plenary.nvim",
-			"mfussenegger/nvim-dap",
 		},
 	}
 end)
