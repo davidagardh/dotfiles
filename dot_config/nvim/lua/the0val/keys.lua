@@ -4,8 +4,9 @@ vim.g.mapleader = " "
 m.add_chord_cancellations('n', '<leader>')
 m.always_override = true
 
--- Easy saving
+-- Quick common actions
 m.nnoremap("<C-s>", "<cmd>w<CR>")
+m.nnoremap("<C-w>", "<cmd>q<CR>")
 
 -- Faster split screen switching
 m.nnoremap("<C-h>", "<C-w>h")
