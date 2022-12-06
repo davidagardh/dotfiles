@@ -14,9 +14,4 @@ I use Oh-my-zsh with a few plugins enabled. The theme is [p10k](https://github.c
 
 ## Neovim
 
-I use [packer.nvim](https://github.com/wbthomason/packer.nvim) to manage neovim plugins. Packer is not included in this repo. It needs to be installed manually:
-
-```sh
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-```
+I use [packer.nvim](https://github.com/wbthomason/packer.nvim) to manage neovim plugins. Packer should get installed automatically by chezmoi on first run.
