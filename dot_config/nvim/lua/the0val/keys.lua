@@ -42,6 +42,7 @@ m.nnoremap("<Leader>o", "o<Esc>")
 m.nnoremap("<Leader>O", "O<Esc>")
 
 m.nnoremap("<Leader>f", "<cmd>NvimTreeToggle<CR>")
+m.nnoremap("<Leader>s", require"telescope.builtin".find_files)
 
 -- For language server and such
 local bufopts = { noremap=true, silent=true, buffer=bufnr }

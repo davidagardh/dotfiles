@@ -20,6 +20,7 @@ return require("packer").startup(function(use)
 		"nvim-tree/nvim-tree.lua",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true }
 	}
+	use { "nvim-telescope/telescope.nvim", requires = "nvim-lua/plenary.nvim" }
 
 	-- General IDE-like features
 	use {
