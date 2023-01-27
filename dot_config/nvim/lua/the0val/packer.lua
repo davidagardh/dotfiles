@@ -41,6 +41,7 @@ return require("packer").startup(function(use)
 			{ "hrsh7th/vim-vsnip" },
 		},
 	}
+	use 'neovim/nvim-lspconfig'
 
 	-- Language features
 	use {
