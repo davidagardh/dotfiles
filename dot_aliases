@@ -12,6 +12,11 @@ alias cl="clear"
 alias l="ls -l"
 alias la="ls -lA"
 
+function cdl() {
+	cd $1
+	ls
+}
+
 # Git
 alias gs="git status"
 alias gu="git pull"
