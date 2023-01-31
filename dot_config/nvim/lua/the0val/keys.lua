@@ -26,6 +26,7 @@ m.nnoremap("<C-y>", "3<C-y>")
 -- Exit terminal mode
 m.tnoremap("<Esc>", "<C-\\><C-n>")
 m.tnoremap("<C-k>", "<C-\\><C-n><C-k>")
+m.tnoremap("<C-j>", "<C-\\><C-n><C-j>")
 
 -- Tabbing keeps visual selection
 m.vnoremap("<", "<gv")
