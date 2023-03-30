@@ -51,3 +51,6 @@ system-upgrade() {
 	tr -c java sudo dnf upgrade -y
 }
 
+# Misc.
+alias yubi-switch="gpg-connect-agent "scd serialno" "learn --force" /bye"
+
