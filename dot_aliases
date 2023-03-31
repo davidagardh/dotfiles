@@ -12,6 +12,10 @@ alias cl="clear"
 alias l="ls -l"
 alias la="ls -lA"
 
+alias cz="chezmoi"
+alias czadd="chezmoi add"
+alias czapp="chezmoi apply"
+
 function cdl() {
 	cd $1
 	ls
@@ -52,5 +56,5 @@ system-upgrade() {
 }
 
 # Misc.
-alias yubi-switch="gpg-connect-agent "scd serialno" "learn --force" /bye"
+alias yubi-switch='gpg-connect-agent "scd serialno" "learn --force" /bye'
 

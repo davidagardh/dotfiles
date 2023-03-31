@@ -3,7 +3,10 @@
 [user]
 	name = David Agardh
 	email = agardh.david@gmail.com
+	signingkey = 81AC97CE115333D6!
 [init]
 	defaultBranch = main
 [pull]
 	rebase = true
+[commit]
+	gpgsign = true

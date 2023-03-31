@@ -28,7 +28,10 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -s "$HOME/.cargo/env" ] && \. "$HOME/.cargo/env"  # Sets up path for rust if installed
 
-# YubiKey gpg SSH config
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
+function prep_GPG_with_SSH() {
+	export GPG_TTY="$(tty)"
+	export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+	gpgconf --launch gpg-agent
+}
+
+prep_GPG_with_SSH
