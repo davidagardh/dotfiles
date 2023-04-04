@@ -27,12 +27,3 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -s "$HOME/.cargo/env" ] && \. "$HOME/.cargo/env"  # Sets up path for rust if installed
-
-function prep_GPG_with_SSH() {
-	export GPG_TTY="$(tty)"
-	export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-	gpgconf --launch gpg-agent
-	echo UPDATESTARTUPTTY | gpg-connect-agent
-}
-
-prep_GPG_with_SSH > /dev/null
