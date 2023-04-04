@@ -114,7 +114,14 @@ require('lazy').setup({
   {
     'windwp/nvim-autopairs',
     config = function ()
-      require('nvim-autopairs').setup{}
+      require('nvim-autopairs').setup{
+        check_ts = true,
+        ts_config = {
+          javascript = {'template_string'},
+        },
+        fast_wrap = {},
+      }
+      require('nvim-autopairs').get_rule("'")[1].not_filetypes = { "scheme", "lisp", "clojure" }
     end,
   },
 
@@ -170,16 +177,15 @@ require('lazy').setup({
 -- Set highlight on search
 vim.o.hlsearch = false
 
--- Make line numbers default
+-- Make line numbers relative with current line absolute
+vim.wo.relativenumber = true
 vim.wo.number = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
 -- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
+--vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -194,15 +200,17 @@ vim.o.smartcase = true
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
 
--- Decrease update time
-vim.o.updatetime = 250
+-- Decrease time until recovery file written
+vim.o.updatetime = 1000
+
+-- Set timeout to wait for key sequences
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- NOTE: You should make sure your terminal supports this
+-- Many more colors
 vim.o.termguicolors = true
 
 -- [[ Basic Keymaps ]]
@@ -214,6 +222,11 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+vim.keymap.set('v', '<', '<gv', { silent = true })
+vim.keymap.set('v', '>', '>gv', { silent = true })
+
+vim.keymap.set('n', '+', '"+')
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
