@@ -125,6 +125,12 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'kylechui/nvim-surround',
+    opts = {},
+    event = "VeryLazy",
+  },
+
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
