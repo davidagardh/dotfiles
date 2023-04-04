@@ -7,10 +7,7 @@
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
@@ -22,7 +19,6 @@ return {
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
   },
-
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
@@ -65,11 +61,11 @@ return {
         icons = {
           pause = '⏸',
           play = '▶',
-          step_into = '⏎',
+          step_into = '↵',
           step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
+          step_out = '↱',
+          step_back = '⏮',
+          run_last = '↺',
           terminate = '⏹',
         },
       },
