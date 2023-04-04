@@ -4,7 +4,6 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Install package manager
---    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -19,14 +18,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
 --
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- NOTE: First, some plugins that don't require any configuration
-
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
@@ -34,8 +30,8 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
+  -- This is where your plugins related to LSP can be installed.
+  -- The configuration is done below. Search for lspconfig to find it below.
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -67,6 +63,7 @@ require('lazy').setup({
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
+
   { -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -115,7 +112,7 @@ require('lazy').setup({
   { -- Colorize pair of brackets using treesitter context
     'HiPhish/nvim-ts-rainbow2',
     config = function ()
-      vim.api.nvim_set_hl(0, "TSRainbowRed", { fg="#ffffff"})
+      vim.api.nvim_set_hl(0, "TSRainbowWhite", { fg="#ffffff"})
     end,
   },
 
@@ -192,8 +189,8 @@ require('lazy').setup({
 vim.o.hlsearch = false
 
 -- Make line numbers relative with current line absolute
-vim.wo.relativenumber = true
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -227,6 +224,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- Many more colors
 vim.o.termguicolors = true
 
+-- Together with sleuth plugin sets a defualt size for hard tabs
+vim.opt.tabstop = 4
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -240,7 +240,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('v', '<', '<gv', { silent = true })
 vim.keymap.set('v', '>', '>gv', { silent = true })
 
-vim.keymap.set('n', '+', '"+')
+vim.keymap.set({'n', 'v'}, '+', '"+')
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -360,7 +360,7 @@ require('nvim-treesitter.configs').setup {
     strategy = require('ts-rainbow').strategy.global,
     -- Change bracket colors
     hlgroups = {
-      'TSRainbowRed',
+      'TSRainbowWhite',
       'TSRainbowYellow',
       'TSRainbowBlue',
       'TSRainbowOrange',
