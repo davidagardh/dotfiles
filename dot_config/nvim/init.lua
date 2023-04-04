@@ -54,7 +54,15 @@ require('lazy').setup({
 
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+    dependencies = { 'hrsh7th/cmp-nvim-lsp' },
+  },
+
+  { -- Snippets
+    'L3MON4D3/LuaSnip',
+    dependencies = { 'saadparwaiz1/cmp_luasnip', 'honza/vim-snippets' },
+    config = function() -- vim-snippets has lots of useful snippets to get started
+      require("luasnip.loaders.from_snipmate").lazy_load()
+    end,
   },
 
   -- Useful plugin to show you pending keybinds.
