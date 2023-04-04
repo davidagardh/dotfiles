@@ -30,9 +30,13 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  -- Enables . to repeat complex commands from plugins, eg. nvim-surround
+  'tpope/vim-repeat',
+
   -- This is where your plugins related to LSP can be installed.
   -- The configuration is done below. Search for lspconfig to find it below.
-  { -- LSP Configuration & Plugins
+  {
+    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
@@ -48,12 +52,14 @@ require('lazy').setup({
     },
   },
 
-  { -- Autocompletion
+  {
+    -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = { 'hrsh7th/cmp-nvim-lsp' },
   },
 
-  { -- Snippets
+  {
+    -- Snippets
     'L3MON4D3/LuaSnip',
     dependencies = { 'saadparwaiz1/cmp_luasnip', 'honza/vim-snippets' },
     config = function() -- vim-snippets has lots of useful snippets to get started
@@ -62,9 +68,10 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',          opts = {} },
 
-  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
+  {
+    -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
       -- See `:help gitsigns.txt`
@@ -78,7 +85,8 @@ require('lazy').setup({
     },
   },
 
-  { -- Theme inspired by Atom
+  {
+    -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function()
@@ -86,7 +94,8 @@ require('lazy').setup({
     end,
   },
 
-  { -- Set lualine as statusline
+  {
+    -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
@@ -99,7 +108,8 @@ require('lazy').setup({
     },
   },
 
-  { -- Add indentation guides even on blank lines
+  {
+    -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
@@ -109,20 +119,21 @@ require('lazy').setup({
     },
   },
 
-  { -- Colorize pair of brackets using treesitter context
+  {
+    -- Colorize pair of brackets using treesitter context
     'HiPhish/nvim-ts-rainbow2',
-    config = function ()
-      vim.api.nvim_set_hl(0, "TSRainbowWhite", { fg="#ffffff"})
+    config = function()
+      vim.api.nvim_set_hl(0, "TSRainbowWhite", { fg = "#ffffff" })
     end,
   },
 
   {
     'windwp/nvim-autopairs',
-    config = function ()
-      require('nvim-autopairs').setup{
+    config = function()
+      require('nvim-autopairs').setup {
         check_ts = true,
         ts_config = {
-          javascript = {'template_string'},
+          javascript = { 'template_string' },
         },
         fast_wrap = {},
       }
@@ -137,7 +148,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',         opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -155,7 +166,8 @@ require('lazy').setup({
     end,
   },
 
-  { -- Highlight, edit, and navigate code
+  {
+    -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
@@ -237,10 +249,18 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+-- Faster scrolling
+vim.keymap.set({ 'n', 'v' }, '<C-e>', '6<C-e>')
+vim.keymap.set({ 'n', 'v' }, '<C-y>', '6<C-y>')
+-- Keep some text visible above/below cursor
+vim.opt.scrolloff = 6
+
+-- Indenting keeps the current highlighting
 vim.keymap.set('v', '<', '<gv', { silent = true })
 vim.keymap.set('v', '>', '>gv', { silent = true })
 
-vim.keymap.set({'n', 'v'}, '+', '"+')
+-- Simplify using system clipboard
+vim.keymap.set({ 'n', 'v' }, '+', '"+')
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -429,11 +449,11 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
+  gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-
+  clojure_lsp = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
