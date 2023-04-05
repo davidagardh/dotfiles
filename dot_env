@@ -25,6 +25,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/share/coursier/bin"
 export PATH="$PATH:$HOME/.cache/scalacli/local-repo/bin/scala-cli"
 export PATH="$PATH:$HOME/.local/share/coursier/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
