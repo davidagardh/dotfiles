@@ -32,10 +32,6 @@ alias gcam="git commit -am"
 alias gp="git pull && git push"
 alias gsw="git switch"
 
-if type glab > /dev/null; then
-	alias glab="op plugin run -- glab"
-fi
-
 # youtube-dl
 alias yt=youtube-dl
 alias ytmp3="youtube-dl --extract-audio --audio-format mp3"
