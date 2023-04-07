@@ -4,8 +4,9 @@
 
 if command -v go > /dev/null ; then
     export GOPATH=$(go env GOPATH)
-    export GOBIN=$GOPATH/bin
-	PATH=$GOBIN:$PATH
+    export GOBIN=$(go env GOBIN)
+    export PATH=$GOBIN:$PATH
+    export GOROOT=$(go env GOROOT)
 fi
 
 if command -v op > /dev/null; then
