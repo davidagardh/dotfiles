@@ -285,6 +285,9 @@ vim.keymap.set({ 'n', 'v' }, '<C-y>', '6<C-y>')
 -- Keep some text visible above/below cursor
 vim.opt.scrolloff = 6
 
+-- Add shortcut for saving
+vim.keymap.set('n', '<C-s>', '<cmd>w<enter>')
+
 -- Indenting keeps the current highlighting
 vim.keymap.set('v', '<', '<gv', { silent = true })
 vim.keymap.set('v', '>', '>gv', { silent = true })
