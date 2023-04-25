@@ -178,7 +178,14 @@ require('lazy').setup({
   },
 
   {
-    -- Go language plugin
+    'lervag/vimtex',
+    config = function()
+
+    end,
+  },
+
+  {
+    -- hsnhntsho language plugin
     'ray-x/go.nvim',
     opts = {
       disable_defaults = true,
@@ -287,6 +294,9 @@ vim.opt.scrolloff = 6
 
 -- Add shortcut for saving
 vim.keymap.set('n', '<C-s>', '<cmd>w<enter>')
+
+-- Escape to exit terminal mode
+vim.keymap.set('t', '<Esc>', '<C-\><C-n>')
 
 -- Indenting keeps the current highlighting
 vim.keymap.set('v', '<', '<gv', { silent = true })
