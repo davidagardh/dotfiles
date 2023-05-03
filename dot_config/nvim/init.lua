@@ -33,6 +33,14 @@ require('lazy').setup({
   -- Enables . to repeat complex commands from plugins, eg. nvim-surround
   'tpope/vim-repeat',
 
+  -- Adds the sneak motion 's'
+  {
+    'ggandor/leap.nvim',
+    config = function()
+      require('leap').add_default_mappings()
+    end
+  },
+
   -- This is where your plugins related to LSP can be installed.
   -- The configuration is done below. Search for lspconfig to find it below.
   {
@@ -276,6 +284,10 @@ vim.o.termguicolors = true
 -- Together with sleuth plugin sets a defualt size for hard tabs
 vim.opt.tabstop = 4
 
+-- Split more logically
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -294,9 +306,17 @@ vim.opt.scrolloff = 6
 
 -- Add shortcut for saving
 vim.keymap.set('n', '<C-s>', '<cmd>w<enter>')
+vim.keymap.set('i', '<C-s>', '<cmd>w<enter>')
 
--- Escape to exit terminal mode
-vim.keymap.set('t', '<Esc>', '<C-\><C-n>')
+-- Improve ergonomics for terminal mode
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
+vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>')
+
+-- Resize splits
+vim.keymap.set('n', '<M-j>', '<cmd>resize +6<enter>')
+vim.keymap.set('n', '<M-k>', '<cmd>resize -6<enter>')
+vim.keymap.set('n', '<M-h>', '<cmd>vertical resize +6<enter>')
+vim.keymap.set('n', '<M-l>', '<cmd>vertical resize -6<enter>')
 
 -- Indenting keeps the current highlighting
 vim.keymap.set('v', '<', '<gv', { silent = true })
