@@ -306,7 +306,7 @@ vim.opt.scrolloff = 6
 
 -- Add shortcut for saving
 vim.keymap.set('n', '<C-s>', '<cmd>w<enter>')
-vim.keymap.set('i', '<C-s>', '<cmd>w<enter>')
+vim.keymap.set('i', '<C-s>', '<Esc><cmd>w<enter>')
 
 -- Improve ergonomics for terminal mode
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')

@@ -42,14 +42,14 @@ return {
     }
 
     -- Basic debugging keymaps, feel free to change to your liking!
-    vim.keymap.set('n', '<F5>', dap.continue)
-    vim.keymap.set('n', '<F1>', dap.step_into)
-    vim.keymap.set('n', '<F2>', dap.step_over)
-    vim.keymap.set('n', '<F3>', dap.step_out)
-    vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
+    vim.keymap.set('n', '<F5>', dap.continue, { desc = '[F5] Start/continue debugging' })
+    vim.keymap.set('n', '<F1>', dap.step_into, { desc = '[F1] Step into' })
+    vim.keymap.set('n', '<F2>', dap.step_over, { desc = '[F2] Step over' })
+    vim.keymap.set('n', '<F3>', dap.step_out, { desc = '[F3] Step out' })
+    vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = '[b] Toggle breakpoint' })
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-    end)
+    end, { desc = '[B] Set conditional breakpoint' })
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
