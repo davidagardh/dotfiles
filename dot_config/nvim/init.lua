@@ -18,6 +18,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- For lsp. Needs to be declared here to be passed to flutter-tools configuration.
+local on_attach
 --  You can configure plugins using the `config` key.
 --
 --  You can also configure plugins after the setup call,
@@ -233,52 +235,7 @@ require('lazy').setup({
     'akinsho/flutter-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'stevearc/dressing.nvim', },
     lazy = false,
-    opts = {
-      debugger = {
-        -- integrate with nvim dap + install dart code debugger
-        enabled = true,
-        run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
-        -- if empty dap will not stop on any exceptions, otherwise it will stop on those specified
-        -- see |:help dap.set_exception_breakpoints()| for more info
-        exception_breakpoints = { "default" },
-        register_configurations = function(paths)
-          require("dap").configurations.dart = {
-            {
-              type = "dart",
-              request = "launch",
-              name = "Launch flutter",
-              dartSdkPath = os.getenv('HOME') .. ".local/share/flutter/bin/cache/dart-sdk/",
-              flutterSdkPath = os.getenv('HOME') .. ".local/share/flutter",
-              program = "${workspaceFolder}/lib/main.dart",
-              cwd = "${workspaceFolder}",
-            }
-          }
-        end,
-      },
-      lsp = {
-        color = {
-          -- show the derived colours for dart variables
-          enabled = true,         -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
-          background = false,     -- highlight the background
-          background_color = nil, -- required, when background is transparent (i.e. background_color = { r = 19, g = 17, b = 24},)
-          foreground = false,     -- highlight the foreground
-          virtual_text = true,    -- show the highlight using virtual text
-          virtual_text_str = "■", -- the virtual text character to highlight
-        },
-        -- see the link below for details on each option:
-        -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
-        settings = {
-          showTodos = true,
-          completeFunctionCalls = true,
-          analysisExcludedFolders = {},
-          renameFilesWithClasses = "prompt", -- "always"
-          enableSnippets = true,
-          updateImportsOnRename = true,      -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
-          documentation = "full",
-        }
-      }
-    },
-    config = true,
+    config = false,
   },
 
   -- Adds additional configuration for neovim/nvim-lsp to automatically format
@@ -514,7 +471,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagn
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -576,6 +533,53 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+}
+
+require('flutter-tools').setup {
+  debugger = {
+    -- integrate with nvim dap + install dart code debugger
+    enabled = true,
+    run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
+    -- if empty dap will not stop on any exceptions, otherwise it will stop on those specified
+    -- see |:help dap.set_exception_breakpoints()| for more info
+    exception_breakpoints = { "default" },
+    register_configurations = function(paths)
+      require("dap").configurations.dart = {
+        {
+          type = "dart",
+          request = "launch",
+          name = "Launch flutter",
+          dartSdkPath = os.getenv('HOME') .. ".local/share/flutter/bin/cache/dart-sdk/",
+          flutterSdkPath = os.getenv('HOME') .. ".local/share/flutter",
+          program = "${workspaceFolder}/lib/main.dart",
+          cwd = "${workspaceFolder}",
+        }
+      }
+    end,
+  },
+  lsp = {
+    on_attach = on_attach,
+    color = {
+      -- show the derived colours for dart variables
+      enabled = true,         -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
+      background = false,     -- highlight the background
+      background_color = nil, -- required, when background is transparent (i.e. background_color = { r = 19, g = 17, b = 24},)
+      foreground = false,     -- highlight the foreground
+      virtual_text = true,    -- show the highlight using virtual text
+      virtual_text_str = "■", -- the virtual text character to highlight
+    },
+    -- see the link below for details on each option:
+    -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
+    settings = {
+      showTodos = true,
+      completeFunctionCalls = true,
+      analysisExcludedFolders = {},
+      renameFilesWithClasses = "prompt", -- "always"
+      enableSnippets = true,
+      updateImportsOnRename = true,      -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
+      documentation = "full",
+    }
+  }
 }
 
 -- Setup neovim lua configuration
