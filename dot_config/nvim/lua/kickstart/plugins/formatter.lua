@@ -30,7 +30,7 @@ return {
               return
             end
 
-            vim.cmd 'FormatWrite'
+            vim.cmd 'FormatWriteLock'
           end,
         })
       end,
@@ -38,9 +38,14 @@ return {
 
     require 'formatter'.setup {
       filetype = {
-        lua = require 'formatter.filetypes.lua'.luaformatter,
+        lua = require 'formatter.filetypes.lua'.stylua,
         go = require 'formatter.filetypes.go'.goimports,
-      }
+        java = function()
+          return {
+            exe = '/home/david/.local/share/nvim/mason/packages/google-java-format/google-java-format',
+          }
+        end,
+      },
     }
   end,
 }

@@ -40,7 +40,7 @@ require('lazy').setup({
     'ggandor/leap.nvim',
     config = function()
       require('leap').add_default_mappings()
-    end
+    end,
   },
 
   -- This is where your plugins related to LSP can be installed.
@@ -55,7 +55,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       tag = "legacy", opts = {} },
+      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -73,12 +73,12 @@ require('lazy').setup({
     'L3MON4D3/LuaSnip',
     dependencies = { 'saadparwaiz1/cmp_luasnip', 'honza/vim-snippets' },
     config = function() -- vim-snippets has lots of useful snippets to get started
-      require("luasnip.loaders.from_snipmate").lazy_load()
+      require('luasnip.loaders.from_snipmate').lazy_load()
     end,
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',          opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
 
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
@@ -133,7 +133,7 @@ require('lazy').setup({
     -- Colorize pair of brackets using treesitter context
     'HiPhish/nvim-ts-rainbow2',
     config = function()
-      vim.api.nvim_set_hl(0, "TSRainbowWhite", { fg = "#ffffff" })
+      vim.api.nvim_set_hl(0, 'TSRainbowWhite', { fg = '#ffffff' })
     end,
   },
 
@@ -147,18 +147,18 @@ require('lazy').setup({
         },
         fast_wrap = {},
       }
-      require('nvim-autopairs').get_rule("'")[1].not_filetypes = { "scheme", "lisp", "clojure" }
+      require('nvim-autopairs').get_rule("'")[1].not_filetypes = { 'scheme', 'lisp', 'clojure' }
     end,
   },
 
   {
     'kylechui/nvim-surround',
     opts = {},
-    event = "VeryLazy",
+    event = 'VeryLazy',
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',         opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -189,9 +189,7 @@ require('lazy').setup({
 
   {
     'lervag/vimtex',
-    config = function()
-
-    end,
+    config = function() end,
   },
 
   {
@@ -207,24 +205,24 @@ require('lazy').setup({
     'scalameta/nvim-metals',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-      local metals_config = require("metals").bare_config()
+      local metals_config = require('metals').bare_config()
       metals_config.settings = {
         showImplicitArguments = true,
         excludedPackages = {},
       }
       metals_config.capabilities = require('cmp_nvim_lsp').default_capabilities()
       metals_config.on_attach = function(_, _)
-        require("metals").setup_dap()
+        require('metals').setup_dap()
       end
       -- Autocmd that will actually be in charging of starting the whole thing
-      local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-      vim.api.nvim_create_autocmd("FileType", {
+      local nvim_metals_group = vim.api.nvim_create_augroup('nvim-metals', { clear = true })
+      vim.api.nvim_create_autocmd('FileType', {
         -- NOTE: You may or may not want java included here. You will need it if you
         -- want basic Java support but it may also conflict if you are using
         -- something like nvim-jdtls which also works on a java filetype autocmd.
-        pattern = { "scala", "sbt" },
+        pattern = { 'scala', 'sbt' },
         callback = function()
-          require("metals").initialize_or_attach(metals_config)
+          require('metals').initialize_or_attach(metals_config)
         end,
         group = nvim_metals_group,
       })
@@ -233,7 +231,7 @@ require('lazy').setup({
 
   {
     'akinsho/flutter-tools.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'stevearc/dressing.nvim', },
+    dependencies = { 'nvim-lua/plenary.nvim', 'stevearc/dressing.nvim' },
     lazy = false,
     config = false,
   },
@@ -466,10 +464,10 @@ require('nvim-treesitter.configs').setup {
 }
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
@@ -544,18 +542,18 @@ require('flutter-tools').setup {
     run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
     -- if empty dap will not stop on any exceptions, otherwise it will stop on those specified
     -- see |:help dap.set_exception_breakpoints()| for more info
-    exception_breakpoints = { "default" },
+    exception_breakpoints = { 'default' },
     register_configurations = function(paths)
-      require("dap").configurations.dart = {
+      require('dap').configurations.dart = {
         {
-          type = "dart",
-          request = "launch",
-          name = "Launch flutter",
-          dartSdkPath = os.getenv('HOME') .. ".local/share/flutter/bin/cache/dart-sdk/",
-          flutterSdkPath = os.getenv('HOME') .. ".local/share/flutter",
-          program = "${workspaceFolder}/lib/main.dart",
-          cwd = "${workspaceFolder}",
-        }
+          type = 'dart',
+          request = 'launch',
+          name = 'Launch flutter',
+          dartSdkPath = os.getenv 'HOME' .. '.local/share/flutter/bin/cache/dart-sdk/',
+          flutterSdkPath = os.getenv 'HOME' .. '.local/share/flutter',
+          program = '${workspaceFolder}/lib/main.dart',
+          cwd = '${workspaceFolder}',
+        },
       }
     end,
   },
@@ -568,7 +566,7 @@ require('flutter-tools').setup {
       background_color = nil, -- required, when background is transparent (i.e. background_color = { r = 19, g = 17, b = 24},)
       foreground = false, -- highlight the foreground
       virtual_text = true, -- show the highlight using virtual text
-      virtual_text_str = "■", -- the virtual text character to highlight
+      virtual_text_str = '■', -- the virtual text character to highlight
     },
     -- see the link below for details on each option:
     -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
@@ -576,12 +574,12 @@ require('flutter-tools').setup {
       showTodos = true,
       completeFunctionCalls = true,
       analysisExcludedFolders = {},
-      renameFilesWithClasses = "prompt", -- "always"
+      renameFilesWithClasses = 'prompt', -- "always"
       enableSnippets = true,
-      updateImportsOnRename = true,      -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
-      documentation = "full",
-    }
-  }
+      updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
+      documentation = 'full',
+    },
+  },
 }
 
 -- Setup neovim lua configuration
