@@ -38,7 +38,7 @@ alias ytmp3="youtube-dl --extract-audio --audio-format mp3"
 
 # toolbox
 alias te="toolbox enter"
-alias tr="toolbox run"
+alias trn="toolbox run"
 alias tdnf="toolbox run dnf"
 alias tnvim="toolbox run nvim"
 
