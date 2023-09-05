@@ -30,7 +30,7 @@ return {
               return
             end
 
-            vim.cmd 'FormatWriteLock'
+            vim.cmd 'FormatWrite'
           end,
         })
       end,
