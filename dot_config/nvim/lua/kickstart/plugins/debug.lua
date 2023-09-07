@@ -82,20 +82,20 @@ return {
     -- Scala specific config
     dap.configurations.scala = {
       {
-        type = "scala",
-        request = "launch",
-        name = "RunOrTest",
+        type = 'scala',
+        request = 'launch',
+        name = 'RunOrTest',
         metals = {
-          runType = "runOrTestFile",
+          runType = 'runOrTestFile',
           --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
         },
       },
       {
-        type = "scala",
-        request = "launch",
-        name = "Test Target",
+        type = 'scala',
+        request = 'launch',
+        name = 'Test Target',
         metals = {
-          runType = "testTarget",
+          runType = 'testTarget',
         },
       },
     }
