@@ -24,7 +24,7 @@ local on_attach
 --
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
-require('lazy').setup({
+require 'lazy'.setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
@@ -39,7 +39,7 @@ require('lazy').setup({
   {
     'ggandor/leap.nvim',
     config = function()
-      require('leap').add_default_mappings()
+      require 'leap'.add_default_mappings()
     end,
   },
 
@@ -55,7 +55,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -73,12 +73,12 @@ require('lazy').setup({
     'L3MON4D3/LuaSnip',
     dependencies = { 'saadparwaiz1/cmp_luasnip', 'honza/vim-snippets' },
     config = function() -- vim-snippets has lots of useful snippets to get started
-      require('luasnip.loaders.from_snipmate').lazy_load()
+      require 'luasnip.loaders.from_snipmate'.lazy_load()
     end,
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',          opts = {} },
 
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
@@ -140,14 +140,14 @@ require('lazy').setup({
   {
     'windwp/nvim-autopairs',
     config = function()
-      require('nvim-autopairs').setup {
+      require 'nvim-autopairs'.setup {
         check_ts = true,
         ts_config = {
           javascript = { 'template_string' },
         },
         fast_wrap = {},
       }
-      require('nvim-autopairs').get_rule("'")[1].not_filetypes = { 'scheme', 'lisp', 'clojure' }
+      require 'nvim-autopairs'.get_rule "'"[1].not_filetypes = { 'scheme', 'lisp', 'clojure' }
     end,
   },
 
@@ -158,7 +158,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',         opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -183,7 +183,7 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     config = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
+      pcall(require 'nvim-treesitter.install'.update { with_sync = true })
     end,
   },
 
@@ -205,14 +205,14 @@ require('lazy').setup({
     'scalameta/nvim-metals',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-      local metals_config = require('metals').bare_config()
+      local metals_config = require 'metals'.bare_config()
       metals_config.settings = {
         showImplicitArguments = true,
         excludedPackages = {},
       }
-      metals_config.capabilities = require('cmp_nvim_lsp').default_capabilities()
+      metals_config.capabilities = require 'cmp_nvim_lsp'.default_capabilities()
       metals_config.on_attach = function(_, _)
-        require('metals').setup_dap()
+        require 'metals'.setup_dap()
       end
       -- Autocmd that will actually be in charging of starting the whole thing
       local nvim_metals_group = vim.api.nvim_create_augroup('nvim-metals', { clear = true })
@@ -222,11 +222,22 @@ require('lazy').setup({
         -- something like nvim-jdtls which also works on a java filetype autocmd.
         pattern = { 'scala', 'sbt' },
         callback = function()
-          require('metals').initialize_or_attach(metals_config)
+          require 'metals'.initialize_or_attach(metals_config)
         end,
         group = nvim_metals_group,
       })
     end,
+  },
+
+  {
+    'mfussenegger/nvim-jdtls',
+    config = function(_, opts)
+      require 'jdtls'.start_or_attach(opts)
+    end,
+    opts = {
+      cmd = { os.getenv 'HOME' .. '/.local/share/nvim/mason/packages/jdtls/bin/jdtls' },
+      root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+    }
   },
 
   {
@@ -239,9 +250,9 @@ require('lazy').setup({
   -- Adds additional configuration for neovim/nvim-lsp to automatically format
   -- file on save, using the formatter provided by the lsp-server.
   -- Also useful as reference for autocommands and augroups.
-  --require 'kickstart.plugins.autoformat',
+  require 'kickstart.plugins.autoformat',
 
-  require 'kickstart.plugins.formatter',
+  -- require 'kickstart.plugins.formatter',
 
   -- Installs and configures 'mfussenegger/nvim-dap'
   -- Debuggers can be installed with mason or as plugins (if so, put them in debug.lua)
@@ -348,7 +359,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
+require 'telescope'.setup {
   defaults = {
     mappings = {
       i = {
@@ -360,31 +371,31 @@ require('telescope').setup {
 }
 
 -- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
+pcall(require 'telescope'.load_extension, 'fzf')
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>?', require 'telescope.builtin'.oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader><space>', require 'telescope.builtin'.buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+  require 'telescope.builtin'.current_buffer_fuzzy_find(require 'telescope.themes'.get_dropdown {
     winblend = 10,
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sf', require 'telescope.builtin'.find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sh', require 'telescope.builtin'.help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sw', require 'telescope.builtin'.grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', require 'telescope.builtin'.live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', require 'telescope.builtin'.diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- Create shortcut for Neo-tree filetree
 vim.keymap.set('n', '<leader>f', '<cmd>Neotree<CR>', { desc = '[F]ile tree' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup {
+require 'nvim-treesitter.configs'.setup {
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vim', 'clojure', 'go', 'java' },
 
@@ -453,7 +464,7 @@ require('nvim-treesitter.configs').setup {
     -- Which query to use for finding delimiters
     query = 'rainbow-parens',
     -- Highlight the entire buffer all at once
-    strategy = require('ts-rainbow').strategy.global,
+    strategy = require 'ts-rainbow'.strategy.global,
     -- Change bracket colors
     hlgroups = {
       'TSRainbowWhite',
@@ -494,11 +505,11 @@ on_attach = function(_, bufnr)
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  nmap('gr', require 'telescope.builtin'.lsp_references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap('<leader>ds', require 'telescope.builtin'.lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap('<leader>ws', require 'telescope.builtin'.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -530,7 +541,6 @@ local servers = {
   rust_analyzer = {},
   -- tsserver = {},
   clojure_lsp = {},
-  jdtls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -539,7 +549,7 @@ local servers = {
   },
 }
 
-require('flutter-tools').setup {
+require 'flutter-tools'.setup {
   debugger = {
     -- integrate with nvim dap + install dart code debugger
     enabled = true,
@@ -548,13 +558,13 @@ require('flutter-tools').setup {
     -- see |:help dap.set_exception_breakpoints()| for more info
     exception_breakpoints = { 'default' },
     register_configurations = function(paths)
-      require('dap').configurations.dart = {
+      require 'dap'.configurations.dart = {
         {
           type = 'dart',
           request = 'launch',
           name = 'Launch flutter',
-          dartSdkPath = os.getenv 'HOME' .. '.local/share/flutter/bin/cache/dart-sdk/',
-          flutterSdkPath = os.getenv 'HOME' .. '.local/share/flutter',
+          dartSdkPath = os.getenv 'HOME' .. '/.local/share/flutter/bin/cache/dart-sdk/',
+          flutterSdkPath = os.getenv 'HOME' .. '/.local/share/flutter',
           program = '${workspaceFolder}/lib/main.dart',
           cwd = '${workspaceFolder}',
         },
@@ -580,18 +590,18 @@ require('flutter-tools').setup {
       analysisExcludedFolders = {},
       renameFilesWithClasses = 'prompt', -- "always"
       enableSnippets = true,
-      updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
+      updateImportsOnRename = true,      -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
       documentation = 'full',
     },
   },
 }
 
 -- Setup neovim lua configuration
-require('neodev').setup()
+require 'neodev'.setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities = require 'cmp_nvim_lsp'.default_capabilities(capabilities)
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
@@ -602,7 +612,7 @@ mason_lspconfig.setup {
 
 mason_lspconfig.setup_handlers {
   function(server_name)
-    require('lspconfig')[server_name].setup {
+    require 'lspconfig'[server_name].setup {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],

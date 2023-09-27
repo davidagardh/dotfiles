@@ -50,6 +50,24 @@ return {
           return
         end
 
+        print(client.name)
+
+        if client.name == 'jdtls' then
+          vim.api.nvim_create_autocmd('BufWritePost', {
+            group = get_augroup(client),
+            buffer = bufnr,
+            callback = function()
+              if not format_is_enabled then
+                return
+              end
+
+              require 'formatter.format'.format('', '', 1, vim.api.nvim_buf_line_count(bufnr), { write = true })
+            end,
+          })
+          return
+        end
+
+
         -- Create an autocmd that will run *before* we save the buffer.
         --  Run the formatting command for the LSP that has just attached.
         vim.api.nvim_create_autocmd('BufWritePre', {
@@ -71,4 +89,30 @@ return {
       end,
     })
   end,
+  dependencies = {
+    'mhartington/formatter.nvim',
+    config = function()
+      local format_is_enabled = true
+      vim.api.nvim_create_user_command('AutoFormatterToggle', function()
+        format_is_enabled = not format_is_enabled
+        print('Setting autoformatting to: ' .. tostring(format_is_enabled))
+      end, {})
+
+      require 'formatter'.setup {
+        filetype = {
+          -- lua = require 'formatter.filetypes.lua'.stylua,
+          -- go = require 'formatter.filetypes.go'.goimports,
+          java = function()
+            return {
+              exe = os.getenv 'HOME' .. '/.local/share/nvim/mason/packages/google-java-format/google-java-format',
+              args = {
+                '-',
+              },
+              stdin = true,
+            }
+          end,
+        },
+      }
+    end,
+  },
 }
