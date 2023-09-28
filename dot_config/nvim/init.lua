@@ -26,8 +26,42 @@ local on_attach
 --    as they will be available in your neovim runtime.
 require 'lazy'.setup({
   -- Git related plugins
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim',         -- required
+      'nvim-telescope/telescope.nvim', -- optional
+      'sindrets/diffview.nvim',        -- optional
+      'ibhagwan/fzf-lua',              -- optional
+    },
+    config = {
+      disable_signs = true,
+    },
+  },
+
+  {
+    -- Adds git releated signs to the gutter, as well as utilities for managing changes
+    'lewis6991/gitsigns.nvim',
+    opts = {
+      -- See `:help gitsigns.txt`
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+      },
+    },
+  },
+
+  {
+    -- Adds an easy way to interact with the terminal(s) during a nvim session
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    opts = {
+      --[[ things you want to change go here]]
+    },
+  },
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -79,21 +113,6 @@ require 'lazy'.setup({
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',          opts = {} },
-
-  {
-    -- Adds git releated signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
 
   {
     -- Theme inspired by Atom
@@ -392,6 +411,12 @@ vim.keymap.set('n', '<leader>sd', require 'telescope.builtin'.diagnostics, { des
 
 -- Create shortcut for Neo-tree filetree
 vim.keymap.set('n', '<leader>f', '<cmd>Neotree<CR>', { desc = '[F]ile tree' })
+
+-- Create shortcut for Neogit
+vim.keymap.set('n', '<leader>G', '<cmd>Neogit<CR>', { desc = '[G]it' })
+
+-- Create shortcut for ToggleTerm
+vim.keymap.set('n', '<leader>t', '<cmd>ToggleTerm<CR>', { desc = '[T]oggle terminal' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
