@@ -55,11 +55,12 @@ require 'lazy'.setup({
   },
 
   {
-    -- Adds an easy way to interact with the terminal(s) during a nvim session
+    -- Adds an easy way to interact with terminals in an nvim session
     'akinsho/toggleterm.nvim',
     version = '*',
     opts = {
-      --[[ things you want to change go here]]
+      open_mapping = [[<M-t>]],
+      insert_mappings = true,
     },
   },
 
@@ -254,8 +255,15 @@ require 'lazy'.setup({
       require 'jdtls'.start_or_attach(opts)
     end,
     opts = {
-      cmd = { os.getenv 'HOME' .. '/.local/share/nvim/mason/packages/jdtls/bin/jdtls' },
-      root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+      cmd = {
+        'python',
+        os.getenv 'HOME' .. '/.local/share/nvim/mason/packages/jdtls/bin/jdtls',
+
+        '-configuration', os.getenv 'HOME' .. '/.local/share/nvim/mason/packages/jdtls/bin/jdtls/config_linux',
+
+        -- See `data directory configuration` section in the README
+        '-data', os.getenv 'HOME' .. '/.local/share/nvim/jdtls/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t'),
+      },
     }
   },
 
@@ -352,11 +360,17 @@ vim.keymap.set('i', '<C-s>', '<Esc><cmd>w<enter>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>')
 
+-- Easier movement between splits
+vim.keymap.set('n', '<C-j>', '<cmd>wincmd j<cr>')
+vim.keymap.set('n', '<C-k>', '<cmd>wincmd k<cr>')
+vim.keymap.set('n', '<C-h>', '<cmd>wincmd h<cr>')
+vim.keymap.set('n', '<C-l>', '<cmd>wincmd l<cr>')
+
 -- Resize splits
-vim.keymap.set('n', '<M-j>', '<cmd>resize +6<enter>')
-vim.keymap.set('n', '<M-k>', '<cmd>resize -6<enter>')
-vim.keymap.set('n', '<M-h>', '<cmd>vertical resize +6<enter>')
-vim.keymap.set('n', '<M-l>', '<cmd>vertical resize -6<enter>')
+vim.keymap.set({ 'n', 't' }, '<M-j>', '<cmd>resize +6<enter>')
+vim.keymap.set({ 'n', 't' }, '<M-k>', '<cmd>resize -6<enter>')
+vim.keymap.set({ 'n', 't' }, '<M-h>', '<cmd>vertical resize +6<enter>')
+vim.keymap.set({ 'n', 't' }, '<M-l>', '<cmd>vertical resize -6<enter>')
 
 -- Indenting keeps the current highlighting
 vim.keymap.set('v', '<', '<gv', { silent = true })
@@ -415,8 +429,10 @@ vim.keymap.set('n', '<leader>f', '<cmd>Neotree<CR>', { desc = '[F]ile tree' })
 -- Create shortcut for Neogit
 vim.keymap.set('n', '<leader>G', '<cmd>Neogit<CR>', { desc = '[G]it' })
 
--- Create shortcut for ToggleTerm
-vim.keymap.set('n', '<leader>t', '<cmd>ToggleTerm<CR>', { desc = '[T]oggle terminal' })
+-- Create shortcuts for ToggleTerm
+-- <M-t> is already mapped to toggle most recent TT.
+vim.keymap.set('n', '<M-T>v', '<cmd>ToggleTerm direction=vertical size=60 name=rhs<CR>', { desc = '[T]oggle terminal' })
+vim.keymap.set('n', '<M-T>h', '<cmd>ToggleTerm direction=horizontal size=60 name=btm<CR>', { desc = '[T]oggle terminal' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
