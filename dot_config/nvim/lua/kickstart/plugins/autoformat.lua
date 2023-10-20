@@ -59,20 +59,15 @@ return {
           return
         end
 
-        -- Tsserver usually works poorly. Sorry you work with bad languages
-        -- You can remove this line if you know what you're doing :)
-        if client.name == 'tsserver' then
-          useFormatter(client, bufnr)
-          return
+        local formatterClients = { 'tsserver', 'jdtls', 'html' }
+        for _, v in ipairs(formatterClients) do
+          if client.name == v then
+            useFormatter(client, bufnr)
+            return
+          end
         end
 
-        print(client.name)
-
-        if client.name == 'jdtls' then
-          useFormatter(client, bufnr)
-          return
-        end
-
+        -- print(client.name)
 
         -- Create an autocmd that will run *before* we save the buffer.
         --  Run the formatting command for the LSP that has just attached.
@@ -118,6 +113,7 @@ return {
             }
           end,
           typescript = require 'formatter.filetypes.typescript'.prettier,
+          html = require 'formatter.filetypes.html'.prettier,
         },
       }
     end,
