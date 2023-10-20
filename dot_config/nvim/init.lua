@@ -590,6 +590,7 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+  tsserver = {},
 }
 
 require 'flutter-tools'.setup {
