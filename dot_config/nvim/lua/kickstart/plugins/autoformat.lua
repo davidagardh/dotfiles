@@ -28,6 +28,21 @@ return {
       return _augroups[client.id]
     end
 
+    local function useFormatter(client, bufnr)
+      vim.api.nvim_create_autocmd('BufWritePost', {
+        group = get_augroup(client),
+        buffer = bufnr,
+        callback = function()
+          if not format_is_enabled then
+            return
+          end
+
+          require 'formatter.format'.format('', '', 1, vim.api.nvim_buf_line_count(bufnr), { write = true })
+        end,
+      })
+    end
+
+
     -- Whenever an LSP attaches to a buffer, we will run this function.
     --
     -- See `:help LspAttach` for more information about this autocmd event.
@@ -47,23 +62,14 @@ return {
         -- Tsserver usually works poorly. Sorry you work with bad languages
         -- You can remove this line if you know what you're doing :)
         if client.name == 'tsserver' then
+          useFormatter(client, bufnr)
           return
         end
 
         print(client.name)
 
         if client.name == 'jdtls' then
-          vim.api.nvim_create_autocmd('BufWritePost', {
-            group = get_augroup(client),
-            buffer = bufnr,
-            callback = function()
-              if not format_is_enabled then
-                return
-              end
-
-              require 'formatter.format'.format('', '', 1, vim.api.nvim_buf_line_count(bufnr), { write = true })
-            end,
-          })
+          useFormatter(client, bufnr)
           return
         end
 
@@ -111,6 +117,7 @@ return {
               stdin = true,
             }
           end,
+          typescript = require 'formatter.filetypes.typescript'.prettier,
         },
       }
     end,
