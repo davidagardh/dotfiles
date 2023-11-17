@@ -10,3 +10,7 @@
 	rebase = true
 [commit]
 	gpgsign = true
+[fetch]
+	prune = true
+[diff]
+	colorMoved = zebra
