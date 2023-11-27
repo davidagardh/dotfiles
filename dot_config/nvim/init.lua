@@ -210,6 +210,13 @@ require 'lazy'.setup({
   },
 
   {
+    'ThePrimeagen/refactoring.nvim',
+    opts = {
+
+    }
+  },
+
+  {
     'lervag/vimtex',
     config = function() end,
   },
