@@ -33,6 +33,7 @@ alias gp="git pull"
 alias gpp="git fetch && git push"
 alias gsw="git switch"
 alias gb="git -P branch"
+alias gba="git -P branch -a"
 
 # youtube-dl
 alias yt=youtube-dl
