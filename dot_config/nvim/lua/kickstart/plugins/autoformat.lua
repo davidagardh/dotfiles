@@ -37,11 +37,10 @@ return {
             return
           end
 
-          require 'formatter.format'.format('', '', 1, vim.api.nvim_buf_line_count(bufnr), { write = true })
+          require('formatter.format').format('', '', 1, vim.api.nvim_buf_line_count(bufnr), { write = true })
         end,
       })
     end
-
 
     -- Whenever an LSP attaches to a buffer, we will run this function.
     --
@@ -59,7 +58,8 @@ return {
           return
         end
 
-        local formatterClients = { 'tsserver', 'jdtls', 'html' }
+        -- List of lsp clients for which mhartington/formatter.nvim should be used instead of the lsp included one.
+        local formatterClients = { 'tsserver', 'html', 'lua_ls' }
         for _, v in ipairs(formatterClients) do
           if client.name == v then
             useFormatter(client, bufnr)
@@ -67,7 +67,7 @@ return {
           end
         end
 
-        -- print(client.name)
+        print(client.name)
 
         -- Create an autocmd that will run *before* we save the buffer.
         --  Run the formatting command for the LSP that has just attached.
@@ -99,10 +99,10 @@ return {
         print('Setting autoformatting to: ' .. tostring(format_is_enabled))
       end, {})
 
-      require 'formatter'.setup {
+      require('formatter').setup {
         filetype = {
-          -- lua = require 'formatter.filetypes.lua'.stylua,
-          -- go = require 'formatter.filetypes.go'.goimports,
+          lua = require('formatter.filetypes.lua').stylua,
+          go = require('formatter.filetypes.go').goimports,
           java = function()
             return {
               exe = os.getenv 'HOME' .. '/.local/share/nvim/mason/packages/google-java-format/google-java-format',
@@ -112,8 +112,8 @@ return {
               stdin = true,
             }
           end,
-          typescript = require 'formatter.filetypes.typescript'.prettier,
-          html = require 'formatter.filetypes.html'.prettier,
+          typescript = require('formatter.filetypes.typescript').prettier,
+          html = require('formatter.filetypes.html').prettier,
         },
       }
     end,
