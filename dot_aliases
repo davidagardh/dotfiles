@@ -16,6 +16,8 @@ alias cz="chezmoi"
 alias czadd="chezmoi add"
 alias czapp="chezmoi apply"
 
+alias cdtmp="cd $(mktemp -d)"
+
 function cdl() {
 	cd $1
 	ls
