@@ -103,15 +103,6 @@ require('lazy').setup({
     dependencies = { 'hrsh7th/cmp-nvim-lsp' },
   },
 
-  {
-    -- Snippets
-    'L3MON4D3/LuaSnip',
-    dependencies = { 'saadparwaiz1/cmp_luasnip', 'honza/vim-snippets' },
-    config = function() -- vim-snippets has lots of useful snippets to get started
-      require('luasnip.loaders.from_snipmate').lazy_load()
-    end,
-  },
-
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
 
@@ -209,13 +200,7 @@ require('lazy').setup({
     end,
   },
 
-  {
-    'ThePrimeagen/refactoring.nvim',
-    opts = {
-      prompt_func_return_type = { java = true },
-      prompt_func_param_type = { java = true },
-    },
-  },
+  'ThePrimeagen/refactoring.nvim',
 
   {
     'lervag/vimtex',
@@ -250,33 +235,13 @@ require('lazy').setup({
         -- NOTE: You may or may not want java included here. You will need it if you
         -- want basic Java support but it may also conflict if you are using
         -- something like nvim-jdtls which also works on a java filetype autocmd.
-        pattern = { 'scala', 'sbt' },
+        pattern = { 'scala', 'sbt', 'java' },
         callback = function()
           require('metals').initialize_or_attach(metals_config)
         end,
         group = nvim_metals_group,
       })
     end,
-  },
-
-  {
-    'mfussenegger/nvim-jdtls',
-    config = function(_, opts)
-      require('jdtls').start_or_attach(opts)
-    end,
-    opts = {
-      cmd = {
-        'python',
-        os.getenv 'HOME' .. '/.local/share/nvim/mason/packages/jdtls/bin/jdtls',
-
-        '-configuration',
-        os.getenv 'HOME' .. '/.local/share/nvim/mason/packages/jdtls/bin/jdtls/config_linux',
-
-        -- See `data directory configuration` section in the README
-        '-data',
-        os.getenv 'HOME' .. '/.local/share/nvim/jdtls/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t'),
-      },
-    },
   },
 
   {
@@ -694,16 +659,9 @@ mason_lspconfig.setup_handlers {
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-
-luasnip.config.setup {}
 
 cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
+  snippet = {},
   mapping = cmp.mapping.preset.insert {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -715,8 +673,6 @@ cmp.setup {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
       else
         fallback()
       end
@@ -724,8 +680,6 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
       else
         fallback()
       end
@@ -733,7 +687,6 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'luasnip' },
   },
 }
 
