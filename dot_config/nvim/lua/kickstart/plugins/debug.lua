@@ -18,12 +18,13 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'nvim-dap-virtual-text',
   },
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
 
-    require 'mason-nvim-dap'.setup {
+    require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
       automatic_setup = true,
@@ -77,7 +78,7 @@ return {
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     -- Install golang specific config
-    require 'dap-go'.setup()
+    require('dap-go').setup()
 
     -- Scala specific config
     dap.configurations.scala = {
