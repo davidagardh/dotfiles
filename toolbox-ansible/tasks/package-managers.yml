@@ -1,0 +1,10 @@
+- name: Packages for cargo
+  community.general.cargo:
+    name: 
+      - stylua
+    state: present
+
+- name: Packages for pip
+  pip:
+    name:
+      - pynvim

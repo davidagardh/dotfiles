@@ -1,0 +1,8 @@
+---
+- hosts: toolbox
+  tasks:
+    - import_tasks: tasks/packages.yml
+    - import_tasks: tasks/package-managers.yml
+
+  become: yes
+

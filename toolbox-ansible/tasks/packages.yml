@@ -1,0 +1,33 @@
+- name: Update packages
+  dnf:
+    name: "*"
+    state: latest
+
+- name: Install packages
+  package:
+    name:
+      - gh
+      - fzf
+      - gnome-tweaks
+      - java-17-openjdk-devel
+      - zsh
+      - neovim
+      - go
+      - yt-dlp
+      - tmux
+      - poppler-utils
+      - g++
+      - pinentry-curses
+      - julia
+      - glab
+      - wl-clipboard
+      - pdftk-java
+      - texlive-bibtex
+      - latexmk
+      - ocrmypdf
+      - rust
+      - cargo
+      - luarocks
+      - ripgrep
+      - fd-find
+    state: latest
