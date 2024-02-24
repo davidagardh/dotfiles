@@ -34,7 +34,7 @@ require('lazy').setup({
       'sindrets/diffview.nvim', -- optional
       'ibhagwan/fzf-lua', -- optional
     },
-    config = {
+    opts = {
       disable_signs = true,
     },
   },
@@ -212,6 +212,10 @@ require('lazy').setup({
     'ray-x/go.nvim',
     opts = {
       disable_defaults = true,
+    },
+    dependencies = {
+      'theHamsta/nvim-dap-virtual-text',
+      'ray-x/guihua.lua',
     },
   },
 
@@ -571,19 +575,16 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
   gopls = {},
   -- pyright = {},
   rust_analyzer = {},
-  html = {},
-  clojure_lsp = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
     },
   },
-  tsserver = {},
+  -- tsserver = {},
 }
 
 require('flutter-tools').setup {

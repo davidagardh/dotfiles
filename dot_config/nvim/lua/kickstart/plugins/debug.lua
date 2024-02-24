@@ -18,7 +18,6 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
-    'nvim-dap-virtual-text',
   },
   config = function()
     local dap = require 'dap'
