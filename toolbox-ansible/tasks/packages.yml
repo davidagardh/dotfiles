@@ -25,6 +25,7 @@
       - texlive-bibtex
       - latexmk
       - ocrmypdf
+      - pdfgrep
       - rust
       - cargo
       - luarocks
