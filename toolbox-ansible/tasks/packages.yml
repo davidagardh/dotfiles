@@ -8,6 +8,7 @@
     name:
       - gh
       - fzf
+      - python3-pip
       - gnome-tweaks
       - java-17-openjdk-devel
       - zsh
