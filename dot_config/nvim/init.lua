@@ -26,6 +26,7 @@ local on_attach
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- Git related plugins
+  'tpope/vim-fugitive',
   {
     'NeogitOrg/neogit',
     dependencies = {
@@ -585,6 +586,7 @@ local servers = {
     },
   },
   -- tsserver = {},
+  ansiblels = {},
 }
 
 require('flutter-tools').setup {
