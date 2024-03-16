@@ -10,7 +10,7 @@ if command -v go > /dev/null ; then
 fi
 
 if command -v op > /dev/null; then
-	source ~/.config/op/plugins.sh
+    source ~/.config/op/plugins.sh
 fi
 
 # opt PATH
@@ -36,6 +36,10 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -s "$HOME/.cargo/env" ] && \. "$HOME/.cargo/env"  # Sets up path for rust if installed
 eval "$(ssh-agent)" > /dev/null
+
+if [ -f $HOME/.ghcup/env ]; then
+    source /home/david/.ghcup/env
+fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
