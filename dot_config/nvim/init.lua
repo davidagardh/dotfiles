@@ -210,6 +210,10 @@ require('lazy').setup({
     end,
   },
 
+  -- Show context, i.e. current function, when it has srcolled off the screen
+  'nvim-treesitter/nvim-treesitter-context',
+
+  -- Adds :Refator command
   'ThePrimeagen/refactoring.nvim',
 
   {
@@ -370,6 +374,8 @@ vim.keymap.set('v', '>', '>gv', { silent = true })
 -- Simplify using system clipboard
 vim.keymap.set({ 'n', 'v' }, '+', '"+')
 
+vim.keymap.set('n', '<C-z>', '<C-^>')
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -454,27 +460,14 @@ require('nvim-treesitter.configs').setup {
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<c-space>',
-      node_incremental = '<c-space>',
-      scope_incremental = '<c-s>',
-      node_decremental = '<M-space>',
-    },
-  },
   textobjects = {
     select = {
       enable = true,
       lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
-        ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
         ['af'] = '@function.outer',
         ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
       },
     },
     move = {
@@ -495,15 +488,6 @@ require('nvim-treesitter.configs').setup {
       goto_previous_end = {
         ['[M'] = '@function.outer',
         ['[]'] = '@class.outer',
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = {
-        ['<leader>a'] = '@parameter.inner',
-      },
-      swap_previous = {
-        ['<leader>A'] = '@parameter.inner',
       },
     },
   },
