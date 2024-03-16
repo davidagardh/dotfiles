@@ -33,4 +33,6 @@
       - ripgrep
       - fd-find
       - host-spawn
+      - gmp-devel
+      - ncurses-compat-libs
     state: latest
