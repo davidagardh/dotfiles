@@ -1,4 +1,4 @@
--- See `:help mapleader`
+-- See`:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -216,8 +216,18 @@ require('lazy').setup({
   -- Adds :Refator command
   'ThePrimeagen/refactoring.nvim',
 
+  -- Haskell languge plugin
   {
-    -- hsnhntsho language plugin
+    'mrcjkb/haskell-tools.nvim',
+    version = '^3', -- Recommended
+    ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
+    config = function()
+      require 'custom.haskell-setup'
+    end,
+  },
+
+  -- Go language plugin
+  {
     'ray-x/go.nvim',
     opts = {
       disable_defaults = true,
@@ -614,7 +624,7 @@ require('flutter-tools').setup {
       completeFunctionCalls = true,
       analysisExcludedFolders = {},
       renameFilesWithClasses = 'prompt', -- "always"
-      enableSnippets = true,
+      enableSnippets = false,
       updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
       documentation = 'full',
     },
