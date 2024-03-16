@@ -65,6 +65,15 @@ require('lazy').setup({
     },
   },
 
+  -- Show diagnostics (errors/warnings/hints) in top right
+  {
+    'dgagn/diagflow.nvim',
+    opts = {
+      scope = 'line',
+      show_borders = true,
+    },
+  },
+
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
