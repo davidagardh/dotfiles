@@ -32,4 +32,5 @@
       - luarocks
       - ripgrep
       - fd-find
+      - host-spawn
     state: latest
