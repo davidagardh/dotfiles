@@ -14,5 +14,7 @@ return {
   },
   config = function()
     require('neo-tree').setup {}
+    -- Create shortcut for Neo-tree filetree
+    vim.keymap.set('n', '<leader>f', '<cmd>Neotree position=current<CR>', { desc = '[F]ile tree' })
   end,
 }

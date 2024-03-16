@@ -217,11 +217,6 @@ require('lazy').setup({
   'ThePrimeagen/refactoring.nvim',
 
   {
-    'lervag/vimtex',
-    config = function() end,
-  },
-
-  {
     -- hsnhntsho language plugin
     'ray-x/go.nvim',
     opts = {
@@ -419,9 +414,6 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-
--- Create shortcut for Neo-tree filetree
-vim.keymap.set('n', '<leader>f', '<cmd>Neotree<CR>', { desc = '[F]ile tree' })
 
 -- Create shortcut for Neogit
 vim.keymap.set('n', '<leader>G', '<cmd>Neogit<CR>', { desc = '[G]it' })
