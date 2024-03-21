@@ -1,0 +1,12 @@
+- name: Create host command aliases
+  file:
+    dest: /usr/local/bin/{{ item.src }}
+    src: /usr/bin/host-spawn
+    state: link
+  loop:
+    - { src: ansible-playbook }
+    - { src: ansible-galaxy }
+    - { src: podman }
+    - { src: flatpak }
+    - { src: xdg-open }
+    

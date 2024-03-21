@@ -3,6 +3,7 @@
   tasks:
     - import_tasks: tasks/packages.yml
     - import_tasks: tasks/package-managers.yml
+    - import_tasks: tasks/host-spawn.yml
 
   become: yes
 
