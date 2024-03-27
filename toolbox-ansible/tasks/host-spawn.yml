@@ -9,4 +9,7 @@
     - { src: podman }
     - { src: flatpak }
     - { src: xdg-open }
+    - { src: rpm-ostree }
+    - { src: ostree }
+    - { src: systemctl }
     
