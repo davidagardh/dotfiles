@@ -52,6 +52,27 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, key, action, desc)
+          desc = desc or ''
+          vim.keymap.set(mode, key, action, { buffer = bufnr, desc = desc })
+        end
+        vim.keymap.set('n', ']c', function()
+          if vim.wo.diff then
+            return ']c'
+          end
+          vim.schedule(function()
+            gs.next_hunk()
+          end)
+          return '<Ignore>'
+        end, { expr = true, buffer = bufnr, desc = 'Next [C]hange' })
+
+        map({ 'n', 'v' }, '<leader>hs', gs.stage_hunk, '[s]tage [h]unk')
+        map({ 'n', 'v' }, '<leader>hr', gs.reset_hunk, '[r]eset [h]unk')
+        map({ 'n', 'v' }, '<leader>hd', gs.diffthis, '[d]iff this [h]unk')
+      end,
     },
   },
 
