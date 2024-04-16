@@ -83,6 +83,7 @@ require('lazy').setup({
     opts = {
       open_mapping = [[<M-t>]],
       insert_mappings = true,
+      start_in_insert = true,
     },
   },
 
@@ -676,7 +677,7 @@ require('flutter-tools').setup {
       completeFunctionCalls = true,
       analysisExcludedFolders = {},
       renameFilesWithClasses = 'prompt', -- "always"
-      enableSnippets = false,
+      enableSnippets = true,
       updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
       documentation = 'full',
     },
@@ -709,11 +710,13 @@ mason_lspconfig.setup_handlers {
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
+local luasnip = require 'luasnip'
+luasnip.config.setup {}
 
 cmp.setup {
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert {
@@ -738,9 +741,29 @@ cmp.setup {
         fallback()
       end
     end, { 'i', 's' }),
+    -- Think of <c-l> as moving to the right of your snippet expansion.
+    --  So if you have a snippet that's like:
+    --  function $name($args)
+    --    $body
+    --  end
+    --
+    -- <c-l> will move you to the right of each of the expansion locations.
+    -- <c-h> is similar, except moving you backwards.
+    ['<C-l>'] = cmp.mapping(function()
+      if luasnip.expand_or_locally_jumpable() then
+        luasnip.expand_or_jump()
+      end
+    end, { 'i', 's' }),
+    ['<C-h>'] = cmp.mapping(function()
+      if luasnip.locally_jumpable(-1) then
+        luasnip.jump(-1)
+      end
+    end, { 'i', 's' }),
   },
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+    { name = 'path' },
   },
 }
 
