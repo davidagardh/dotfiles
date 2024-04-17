@@ -35,4 +35,5 @@
       - host-spawn
       - gmp-devel
       - ncurses-compat-libs
+      - tldr
     state: latest
