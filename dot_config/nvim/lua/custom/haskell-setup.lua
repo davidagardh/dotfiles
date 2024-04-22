@@ -7,7 +7,6 @@ local nmap = function(keys, func, desc)
   end
 
   vim.keymap.set('n', keys, func, { noremap = true, silent = true, desc = desc })
-  print 'running here'
 end
 
 -- haskell-language-server relies heavily on codeLenses,
