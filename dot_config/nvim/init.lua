@@ -277,6 +277,7 @@ require('lazy').setup({
     config = function()
       require 'custom.haskell-setup'
     end,
+    --lazy = false,
   },
 
   -- Go language plugin
@@ -635,6 +636,7 @@ local servers = {
   },
   -- tsserver = {},
   ansiblels = {},
+  hls = {},
 }
 
 require('flutter-tools').setup {
