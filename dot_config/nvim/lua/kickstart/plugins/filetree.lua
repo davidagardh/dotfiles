@@ -13,7 +13,10 @@ return {
     },
   },
   config = function()
-    require('neo-tree').setup {}
+    require('neo-tree').setup {
+      window = { position = 'current' },
+      hijack_netrw_behavior = 'open_default',
+    }
     -- Create shortcut for Neo-tree filetree
     vim.keymap.set('n', '<leader>f', '<cmd>Neotree position=current<CR>', { desc = '[F]ile tree' })
   end,
