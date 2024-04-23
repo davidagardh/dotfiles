@@ -84,6 +84,9 @@ require('lazy').setup({
       open_mapping = [[<M-t>]],
       insert_mappings = true,
       start_in_insert = true,
+      on_open = function(_)
+        vim.cmd 'startinsert!'
+      end,
     },
   },
 
