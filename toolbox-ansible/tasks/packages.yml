@@ -36,4 +36,5 @@
       - gmp-devel
       - ncurses-compat-libs
       - tldr
+      - htop
     state: latest
