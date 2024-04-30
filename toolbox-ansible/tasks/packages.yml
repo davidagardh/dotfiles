@@ -37,4 +37,8 @@
       - ncurses-compat-libs
       - tldr
       - htop
+      - chromium
+      - clang
+      - gtk3-devel
+      - ninja-build
     state: latest
