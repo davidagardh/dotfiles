@@ -41,4 +41,5 @@
       - clang
       - gtk3-devel
       - ninja-build
+      - qrencode
     state: latest
