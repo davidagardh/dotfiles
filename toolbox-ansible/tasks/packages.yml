@@ -3,6 +3,22 @@
     name: "*"
     state: latest
 
+- name: Install rpm-fusion
+  yum:
+    name:
+      - 'https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-40.noarch.rpm'
+      - 'https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-40.noarch.rpm'
+    state: present
+    disable_gpg_check: true
+
+
+- name: Remove ffmpeg conflicts
+  package:
+    name:
+      - ffmpeg-free
+      - libswresample-free
+    state: absent
+
 - name: Install packages
   package:
     name:
@@ -42,4 +58,5 @@
       - gtk3-devel
       - ninja-build
       - qrencode
+      - ffmpeg
     state: latest
