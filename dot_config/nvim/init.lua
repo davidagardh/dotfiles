@@ -208,13 +208,8 @@ require('lazy').setup({
     },
   },
 
-  {
-    -- Colorize pair of brackets using treesitter context
-    'HiPhish/nvim-ts-rainbow2',
-    config = function()
-      vim.api.nvim_set_hl(0, 'TSRainbowWhite', { fg = '#ffffff' })
-    end,
-  },
+  -- Colorize pair of brackets using treesitter context
+  'HiPhish/rainbow-delimiters.nvim',
 
   {
     'windwp/nvim-autopairs',
@@ -293,6 +288,12 @@ require('lazy').setup({
       'theHamsta/nvim-dap-virtual-text',
       'ray-x/guihua.lua',
     },
+    config = function()
+      require("go").setup()
+    end,
+    event = {"CmdlineEnter"},
+    ft = {"go", 'gomod'},
+    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   },
 
   {
@@ -548,25 +549,6 @@ require('nvim-treesitter.configs').setup {
         ['[M'] = '@function.outer',
         ['[]'] = '@class.outer',
       },
-    },
-  },
-  rainbow = {
-    enable = true,
-    -- list of languages you want to disable the plugin for
-    disable = {},
-    -- Which query to use for finding delimiters
-    query = 'rainbow-parens',
-    -- Highlight the entire buffer all at once
-    strategy = require('ts-rainbow').strategy.global,
-    -- Change bracket colors
-    hlgroups = {
-      'TSRainbowWhite',
-      'TSRainbowYellow',
-      'TSRainbowBlue',
-      'TSRainbowOrange',
-      'TSRainbowGreen',
-      'TSRainbowViolet',
-      'TSRainbowCyan',
     },
   },
 }
