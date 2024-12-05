@@ -348,44 +348,44 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
--- Set highlight on search
-vim.o.hlsearch = false
-
 -- Make line numbers relative with current line absolute
-vim.wo.number = true
-vim.wo.relativenumber = true
+vim.opt.number = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+vim.optmouse = 'a'
+
+-- Don't show the mode, since it's already in the status line
+vim.opt.showmode = false
 
 -- Sync clipboard between OS and Neovim.
 --vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
-vim.o.breakindent = true
+vim.opt.breakindent = true
 
 -- Save undo history
-vim.o.undofile = true
+vim.opt.undofile = true
 
 -- Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
+vim.opt.signcolumn = 'yes'
 
 -- Decrease time until recovery file written
-vim.o.updatetime = 1000
+vim.opt.updatetime = 1000
 
 -- Set timeout to wait for key sequences
-vim.o.timeout = true
-vim.o.timeoutlen = 300
+vim.opt.timeout = true
+vim.opt.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.opt.completeopt = 'menuone,noselect'
 
 -- Many more colors
-vim.o.termguicolors = true
+vim.opt.termguicolors = true
 
 -- Together with sleuth plugin sets a defualt size for hard tabs
 vim.opt.tabstop = 4
@@ -394,7 +394,26 @@ vim.opt.tabstop = 4
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = 'split'
+
+-- Show which line your cursor is on
+vim.opt.cursorline = false
+
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 6
+
 -- [[ Basic Keymaps ]]
+
+-- Clear highlights on search when pressing <Esc> in normal mode
+--  See `:help hlsearch`
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -407,8 +426,6 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Faster scrolling
 vim.keymap.set({ 'n', 'v' }, '<C-e>', '6<C-e>')
 vim.keymap.set({ 'n', 'v' }, '<C-y>', '6<C-y>')
--- Keep some text visible above/below cursor
-vim.opt.scrolloff = 6
 
 -- Add shortcut for saving
 vim.keymap.set('n', '<C-s>', '<cmd>w<enter>')
