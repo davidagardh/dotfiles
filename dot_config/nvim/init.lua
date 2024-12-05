@@ -432,7 +432,7 @@ vim.keymap.set('n', '<C-s>', '<cmd>w<enter>')
 vim.keymap.set('i', '<C-s>', '<Esc><cmd>w<enter>')
 
 -- Improve ergonomics for terminal mode
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>')
 vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>')
 
 -- Keybinds to make split navigation easier.
