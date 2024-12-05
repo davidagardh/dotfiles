@@ -435,11 +435,14 @@ vim.keymap.set('i', '<C-s>', '<Esc><cmd>w<enter>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>')
 
--- Easier movement between splits
-vim.keymap.set('n', '<C-j>', '<cmd>wincmd j<cr>')
-vim.keymap.set('n', '<C-k>', '<cmd>wincmd k<cr>')
-vim.keymap.set('n', '<C-h>', '<cmd>wincmd h<cr>')
-vim.keymap.set('n', '<C-l>', '<cmd>wincmd l<cr>')
+-- Keybinds to make split navigation easier.
+--  Use CTRL+<hjkl> to switch between windows
+--
+--  See `:help wincmd` for a list of all window commands
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Resize splits
 vim.keymap.set({ 'n', 't' }, '<M-j>', '<cmd>resize +6<enter>')
@@ -454,6 +457,7 @@ vim.keymap.set('v', '>', '>gv', { silent = true })
 -- Simplify using system clipboard
 vim.keymap.set({ 'n', 'v' }, '+', '"+')
 
+-- Easier shortcut for alternate file
 vim.keymap.set('n', '<C-z>', '<C-^>')
 
 -- Highlight when yanking (copying) text
@@ -574,7 +578,7 @@ require('nvim-treesitter.configs').setup {
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
