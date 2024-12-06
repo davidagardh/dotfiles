@@ -784,24 +784,6 @@ require('lazy').setup({
     --lazy = false,
   },
 
-  -- Go language plugin
-  {
-    'ray-x/go.nvim',
-    opts = {
-      disable_defaults = true,
-    },
-    dependencies = {
-      'theHamsta/nvim-dap-virtual-text',
-      'ray-x/guihua.lua',
-    },
-    config = function()
-      require('go').setup()
-    end,
-    event = { 'CmdlineEnter' },
-    ft = { 'go', 'gomod' },
-    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
-  },
-
   -- Installs and configures 'mfussenegger/nvim-dap'
   -- Debuggers can be installed with mason or as plugins (if so, put them in debug.lua)
   require 'kickstart.plugins.debug',
