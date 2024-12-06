@@ -22,18 +22,6 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
-  {
-    'NeogitOrg/neogit',
-    dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'nvim-telescope/telescope.nvim', -- optional
-      'sindrets/diffview.nvim', -- optional
-      'ibhagwan/fzf-lua', -- optional
-    },
-    opts = {
-      disable_signs = true,
-    },
-  },
 
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
@@ -945,9 +933,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
-
--- Create shortcut for Neogit
-vim.keymap.set('n', '<leader>G', '<cmd>Neogit<CR>', { desc = '[G]it' })
 
 -- Create shortcuts for ToggleTerm
 -- <M-t> is already mapped to toggle most recent TT.
