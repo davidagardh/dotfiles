@@ -705,11 +705,7 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
     main = 'ibl',
-    opts = {
-      indent = {
-        char = '┊',
-      },
-    },
+    opts = {},
   },
 
   -- Colorize pair of brackets using treesitter context
