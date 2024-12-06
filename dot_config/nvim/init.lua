@@ -773,17 +773,6 @@ require('lazy').setup({
   -- Adds :Refator command
   'ThePrimeagen/refactoring.nvim',
 
-  -- Haskell languge plugin
-  {
-    'mrcjkb/haskell-tools.nvim',
-    version = '^3', -- Recommended
-    ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
-    config = function()
-      require 'custom.haskell-setup'
-    end,
-    --lazy = false,
-  },
-
   -- Installs and configures 'mfussenegger/nvim-dap'
   -- Debuggers can be installed with mason or as plugins (if so, put them in debug.lua)
   require 'kickstart.plugins.debug',
