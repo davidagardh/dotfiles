@@ -711,20 +711,6 @@ require('lazy').setup({
   -- Colorize pair of brackets using treesitter context
   'HiPhish/rainbow-delimiters.nvim',
 
-  {
-    'windwp/nvim-autopairs',
-    config = function()
-      require('nvim-autopairs').setup {
-        check_ts = true,
-        ts_config = {
-          javascript = { 'template_string' },
-        },
-        fast_wrap = {},
-      }
-      require('nvim-autopairs').get_rule("'")[1].not_filetypes = { 'scheme', 'lisp', 'clojure' }
-    end,
-  },
-
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -742,6 +728,8 @@ require('lazy').setup({
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+
+      require('mini.pairs').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
