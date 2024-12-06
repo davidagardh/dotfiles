@@ -814,35 +814,6 @@ require('lazy').setup({
     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
 
-  {
-    -- Scala language plugin, including language server
-    'scalameta/nvim-metals',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      local metals_config = require('metals').bare_config()
-      metals_config.settings = {
-        showImplicitArguments = true,
-        excludedPackages = {},
-      }
-      metals_config.capabilities = require('cmp_nvim_lsp').default_capabilities()
-      metals_config.on_attach = function(_, _)
-        require('metals').setup_dap()
-      end
-      -- Autocmd that will actually be in charging of starting the whole thing
-      local nvim_metals_group = vim.api.nvim_create_augroup('nvim-metals', { clear = true })
-      vim.api.nvim_create_autocmd('FileType', {
-        -- NOTE: You may or may not want java included here. You will need it if you
-        -- want basic Java support but it may also conflict if you are using
-        -- something like nvim-jdtls which also works on a java filetype autocmd.
-        pattern = { 'scala', 'sbt', 'java' },
-        callback = function()
-          require('metals').initialize_or_attach(metals_config)
-        end,
-        group = nvim_metals_group,
-      })
-    end,
-  },
-
   -- Installs and configures 'mfussenegger/nvim-dap'
   -- Debuggers can be installed with mason or as plugins (if so, put them in debug.lua)
   require 'kickstart.plugins.debug',
