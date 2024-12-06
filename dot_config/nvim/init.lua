@@ -15,8 +15,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
--- For lsp. Needs to be declared here to be passed to flutter-tools configuration.
-local on_attach
 --  You can configure plugins using the `config` key.
 --
 --  You can also configure plugins after the setup call,
@@ -513,7 +511,19 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -797,11 +807,11 @@ require('lazy').setup({
       'ray-x/guihua.lua',
     },
     config = function()
-      require("go").setup()
+      require('go').setup()
     end,
-    event = {"CmdlineEnter"},
-    ft = {"go", 'gomod'},
-    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+    event = { 'CmdlineEnter' },
+    ft = { 'go', 'gomod' },
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
 
   {
@@ -831,13 +841,6 @@ require('lazy').setup({
         group = nvim_metals_group,
       })
     end,
-  },
-
-  {
-    'akinsho/flutter-tools.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'stevearc/dressing.nvim' },
-    lazy = false,
-    config = false,
   },
 
   -- Installs and configures 'mfussenegger/nvim-dap'
@@ -990,54 +993,6 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
-
-require('flutter-tools').setup {
-  debugger = {
-    -- integrate with nvim dap + install dart code debugger
-    enabled = true,
-    run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
-    -- if empty dap will not stop on any exceptions, otherwise it will stop on those specified
-    -- see |:help dap.set_exception_breakpoints()| for more info
-    exception_breakpoints = { 'default' },
-    register_configurations = function(paths)
-      require('dap').configurations.dart = {
-        {
-          type = 'dart',
-          request = 'launch',
-          name = 'Launch flutter',
-          dartSdkPath = os.getenv 'HOME' .. '/.local/share/flutter/bin/cache/dart-sdk/',
-          flutterSdkPath = os.getenv 'HOME' .. '/.local/share/flutter',
-          program = '${workspaceFolder}/lib/main.dart',
-          cwd = '${workspaceFolder}',
-        },
-      }
-    end,
-  },
-  lsp = {
-    on_attach = on_attach,
-    color = {
-      -- show the derived colours for dart variables
-      enabled = true, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
-      background = false, -- highlight the background
-      background_color = nil, -- required, when background is transparent (i.e. background_color = { r = 19, g = 17, b = 24},)
-      foreground = false, -- highlight the foreground
-      virtual_text = true, -- show the highlight using virtual text
-      virtual_text_str = '■', -- the virtual text character to highlight
-    },
-    -- see the link below for details on each option:
-    -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
-    settings = {
-      showTodos = true,
-      completeFunctionCalls = true,
-      analysisExcludedFolders = {},
-      renameFilesWithClasses = 'prompt', -- "always"
-      enableSnippets = true,
-      updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
-      documentation = 'full',
-    },
-  },
-}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
