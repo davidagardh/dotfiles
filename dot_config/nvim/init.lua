@@ -24,42 +24,6 @@ require('lazy').setup({
   'tpope/vim-fugitive',
 
   {
-    -- Adds git releated signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-      on_attach = function(bufnr)
-        local gs = package.loaded.gitsigns
-
-        local function map(mode, key, action, desc)
-          desc = desc or ''
-          vim.keymap.set(mode, key, action, { buffer = bufnr, desc = desc })
-        end
-        vim.keymap.set('n', ']c', function()
-          if vim.wo.diff then
-            return ']c'
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Next [C]hange' })
-
-        map({ 'n', 'v' }, '<leader>hs', gs.stage_hunk, '[s]tage [h]unk')
-        map({ 'n', 'v' }, '<leader>hr', gs.reset_hunk, '[r]eset [h]unk')
-        map({ 'n', 'v' }, '<leader>hd', gs.diffthis, '[d]iff this [h]unk')
-      end,
-    },
-  },
-
-  {
     -- Adds an easy way to interact with terminals in an nvim session
     'akinsho/toggleterm.nvim',
     version = '*',
@@ -761,6 +725,7 @@ require('lazy').setup({
   -- Debuggers can be installed with mason or as plugins (if so, put them in debug.lua)
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.gitsigns',
 }, {})
 
 -- [[ Setting options ]]
