@@ -718,6 +718,7 @@ require('lazy').setup({
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns',
   require 'kickstart.plugins.indent_line',
+  --require 'kickstart.plugins.lint',
 }, {})
 
 -- [[ Setting options ]]
