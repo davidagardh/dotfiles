@@ -663,15 +663,6 @@ require('lazy').setup({
     end,
   },
 
-  {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
-    main = 'ibl',
-    opts = {},
-  },
-
   -- Colorize pair of brackets using treesitter context
   'HiPhish/rainbow-delimiters.nvim',
 
@@ -726,6 +717,7 @@ require('lazy').setup({
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns',
+  require 'kickstart.plugins.indent_line',
 }, {})
 
 -- [[ Setting options ]]
