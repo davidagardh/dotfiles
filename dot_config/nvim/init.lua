@@ -760,7 +760,7 @@ require('lazy').setup({
   -- Installs and configures 'mfussenegger/nvim-dap'
   -- Debuggers can be installed with mason or as plugins (if so, put them in debug.lua)
   require 'kickstart.plugins.debug',
-  require 'kickstart.plugins.filetree',
+  require 'kickstart.plugins.neo-tree',
 }, {})
 
 -- [[ Setting options ]]
