@@ -1,0 +1,17 @@
+# Toolbx config through Ansible
+
+- [Toolbx](https://containertoolbx.org/)
+- [Ansible](https://docs.ansible.com/ansible/latest/index.html)
+
+## Purpose
+
+This ansible playbook sets up a default fedora-toolbox container with all the packages and other config I need. It's intended to be used both for setting up a brand new container (which needs to be done after every major Fedora version) and for updating an existing container.
+
+## Use
+
+´toolbox create´
+
+Edit ´/etc/ansible/hosts´ to include ´fedora-toolbox-41 ansible_connection=podman´.
+
+You might need to install the podman connection from ansible galaxy, but I have never needed to. If so, that's ´ansible-galaxy collection install containers.podman´
+
