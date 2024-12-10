@@ -9,9 +9,13 @@ This ansible playbook sets up a default fedora-toolbox container with all the pa
 
 ## Use
 
-´toolbox create´
+´´´
+> toolbox create
+> echo "[toolbox]\nfedora-toolbox-41 ansible_connection=podman" | sudo tee /etc/ansible/hosts
+´´´
 
-Edit ´/etc/ansible/hosts´ to include ´fedora-toolbox-41 ansible_connection=podman´.
+## Problems
 
 You might need to install the podman connection from ansible galaxy, but I have never needed to. If so, that's ´ansible-galaxy collection install containers.podman´
 
+For first run might need you to install libdnf inside the toolbx. ´toolbox run sudo dnf install -y python-libdnf´
