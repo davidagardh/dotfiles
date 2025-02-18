@@ -61,6 +61,14 @@ system-upgrade() {
 	tr -c java sudo dnf upgrade -y
 }
 
+les() {
+  if [[ -f "$1" ]]; then
+    cat "$1"
+  else
+    ls "$1"
+  fi
+}
+
 # Misc.
 alias yubi-switch='gpg-connect-agent "scd serialno" "learn --force" /bye'
 
