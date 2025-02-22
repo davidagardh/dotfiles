@@ -14,3 +14,10 @@
 	prune = true
 [diff]
 	colorMoved = zebra
+[credential]
+	helper = "!f() { /var/home/david/.vscode-server/bin/384ff7382de624fb94dbaf6da11977bba1ecd427/node /tmp/vscode-remote-containers-e019ea6e-697a-4eaa-8b8e-14797acb1509.js git-credential-helper $*; }; f"
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
