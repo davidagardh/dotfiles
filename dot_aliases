@@ -25,7 +25,7 @@ function cdl() {
 
 # Git
 alias gs="git status"
-alias gu="git pull"
+alias gu="git restore --staged"
 alias gsu="git stash && git pull && git stash pop"
 alias gd="git diff"
 alias ga="git add"
