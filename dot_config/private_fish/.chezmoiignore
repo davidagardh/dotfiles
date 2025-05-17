@@ -1,0 +1,9 @@
+fish_variables
+
+completions/fisher.fish
+completions/tide.fish
+
+*/_tide_*.fish
+functions/tide.fish
+functions/fisher.fish
+functions/tide/
