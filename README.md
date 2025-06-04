@@ -15,3 +15,15 @@ I use [fish](https://fishshell.com/) with the [tide prompt](https://github.com/I
 ## Neovim
 
 Nvim config based on [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). It uses [Lazy](https://github.com/folke/lazy.nvim) to manage plugins.
+
+## YubiKey
+
+[drduh YubiKey Guide](https://github.com/drduh/YubiKey-Guide/)
+
+Setting up a new machine for SSH and gpg:
+
+1. `ssh -K`
+1. (`sudo systemtl restart pcscd`)
+1. `gpg --edit-card`  
+    `> fetch`
+
