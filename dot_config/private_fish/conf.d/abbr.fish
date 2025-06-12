@@ -11,6 +11,7 @@ abbr --add gtp "git stash pop"
 abbr --add gl "git log --oneline --graph"
 abbr --add gb "git branch"
 abbr --add gsw "git switch"
+abbr --add gd "git diff"
 
 abbr --add cz "chezmoi"
 abbr --add czapp "chezmoi apply"
