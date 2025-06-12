@@ -1,7 +1,7 @@
 function sctl
     if set -q DISTROBOX_ENTER_PATH
-        host-spawn sudo systemctl
+        host-spawn sudo systemctl $argv
     else
-        sudo systemctl
+        sudo systemctl $argv
     end
 end
