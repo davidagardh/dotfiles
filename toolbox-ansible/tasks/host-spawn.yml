@@ -1,15 +1,17 @@
 - name: Create host command aliases
   file:
     dest: /usr/local/bin/{{ item.src }}
-    src: /usr/bin/host-spawn
+    src: /usr/bin/distrobox-host-exec
     state: link
   loop:
     - { src: ansible-playbook }
     - { src: ansible-galaxy }
     - { src: podman }
+    - { src: buildah}
     - { src: flatpak }
     - { src: xdg-open }
     - { src: rpm-ostree }
     - { src: ostree }
     - { src: systemctl }
-    
+    - { src: bootc }
+
