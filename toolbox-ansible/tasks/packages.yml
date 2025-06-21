@@ -3,21 +3,25 @@
     name: "*"
     state: latest
 
-- name: Install rpm-fusion
+- name: Collect fedora version
+  command: rpm -E %fedora
+  register: fedora_version
+  changed_when: false
+
+- name: Install rpm-fusion version {{ fedora_version.stdout }}
   yum:
     name:
-      - 'https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-41.noarch.rpm'
-      - 'https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-41.noarch.rpm'
+      - 'https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version.stdout }}.noarch.rpm'
+      - 'https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version.stdout }}.noarch.rpm'
     state: present
     disable_gpg_check: true
 
-
-- name: Remove ffmpeg conflicts
-  package:
+- name: Swap ffmpeg
+  dnf:
     name:
-      - ffmpeg-free
-      - libswresample-free
-    state: absent
+      - ffmpeg
+    state: present
+    allowerasing: true
 
 - name: Install packages
   package:
@@ -26,7 +30,7 @@
       - fzf
       - python3-pip
       - gnome-tweaks
-      - java-17-openjdk-devel
+      - java-21-openjdk-devel
       - zsh
       - neovim
       - go
@@ -58,5 +62,4 @@
       - gtk3-devel
       - ninja-build
       - qrencode
-      - ffmpeg
     state: latest

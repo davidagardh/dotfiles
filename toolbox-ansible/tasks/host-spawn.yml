@@ -4,6 +4,7 @@
     src: /usr/bin/distrobox-host-exec
     state: link
   loop:
+    - { src: ansible }
     - { src: ansible-playbook }
     - { src: ansible-galaxy }
     - { src: podman }
@@ -14,4 +15,5 @@
     - { src: ostree }
     - { src: systemctl }
     - { src: bootc }
+    - { src: tmux }
 
