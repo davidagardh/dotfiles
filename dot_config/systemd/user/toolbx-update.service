@@ -1,0 +1,7 @@
+[Unit]
+Description=Run the ansbile playbook in toolbox-ansible to keep the toolbx updated and in sync with changes to the repo
+
+[Service]
+ExecStart=/usr/sbin/ansible-playbook run.yml
+WorkingDirectory=%h/.local/share/chezmoi/toolbox-ansible
+Type=oneshot

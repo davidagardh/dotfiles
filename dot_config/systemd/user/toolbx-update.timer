@@ -1,0 +1,10 @@
+[Unit]
+Description=Run toolbox update on a weekly schedule
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+RandomizedDelaySec=1h
+
+[Install]
+WantedBy=timers.target
