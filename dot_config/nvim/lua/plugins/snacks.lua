@@ -4,7 +4,50 @@ return {
   priority = 900,
   opts = {
     statuscolumn = {},
-    dashboard = {},
+
+    dashboard = {
+      preset = {
+        keys = {
+          {
+            icon = ' ',
+            key = 'f',
+            desc = 'Find File',
+            action = function()
+              Snacks.dashboard.pick 'files'
+            end,
+          },
+          { icon = ' ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
+          {
+            icon = ' ',
+            key = 'g',
+            desc = 'Find Text',
+            action = function()
+              Snacks.dashboard.pick 'live_grep'
+            end,
+          },
+          {
+            icon = ' ',
+            key = 'r',
+            desc = 'Recent Files',
+            action = function()
+              Snacks.dashboard.pick 'oldfiles'
+            end,
+          },
+          {
+            icon = ' ',
+            key = 'c',
+            desc = 'Config',
+            action = function()
+              Snacks.dashboard.pick('files', { cwd = '~/.local/share/chezmoi/dot_config/nvim/' })
+            end,
+          },
+          { icon = ' ', key = 's', desc = 'Restore Session', section = 'session' },
+          { icon = '󰒲 ', key = 'L', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
+          { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
+        },
+      },
+    },
+
     terminal = {
       gf = function(self)
         local f = vim.fn.findfile(vim.fn.expand '<cfile>', '**')
@@ -34,6 +77,7 @@ return {
         desc = 'Double escape to normal mode',
       },
     },
+
     picker = {},
   },
   keys = {
@@ -60,9 +104,16 @@ return {
       desc = 'Help Pages',
     },
     {
+      '<leader>sg',
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = 'Help Pages',
+    },
+    {
       '<leader>sc',
       function()
-        Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
+        Snacks.picker.files { cwd = '~/.local/share/chezmoi/dot_config/nvim/' }
       end,
       desc = 'Help Pages',
     },
