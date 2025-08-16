@@ -34,4 +34,10 @@ return {
     opts = {},
     event = 'BufEnter',
   },
+
+  {
+    'nvim-lualine/lualine.nvim',
+    event = 'BufEnter',
+    opts = {},
+  },
 }
