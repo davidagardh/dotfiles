@@ -1,5 +1,6 @@
 vim.g.mapleader = ' '
 
+vim.o.shell = 'fish'
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.tabstop = 4
