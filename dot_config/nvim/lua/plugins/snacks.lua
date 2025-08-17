@@ -89,6 +89,15 @@ return {
       mode = { 'n', 'v', 't' },
       desc = 'Toggle Terminal',
     },
+
+    {
+      '<leader>q',
+      function()
+        Snacks.bufdelete()
+      end,
+      'Close Buffer',
+    },
+
     {
       '<leader><space>',
       function()
