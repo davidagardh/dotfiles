@@ -10,6 +10,7 @@ local configs = {
   'lua',
   'markdown',
   'markdown-inline',
+  'python',
   'query',
   'regex',
   'rust',

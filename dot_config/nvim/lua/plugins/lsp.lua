@@ -6,7 +6,7 @@ return {
       'mason-org/mason.nvim',
     },
     config = function()
-      vim.lsp.enable { 'lua_ls', 'gopls', 'html', 'cssls' }
+      vim.lsp.enable { 'lua_ls', 'gopls', 'html', 'cssls', 'jedi_language_server' }
     end,
   },
 
@@ -53,6 +53,7 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { 'stylua' },
+        python = { 'black' },
       },
       format_on_save = function(bufnr)
         local disable_filetypes = { c = true, cpp = true }
