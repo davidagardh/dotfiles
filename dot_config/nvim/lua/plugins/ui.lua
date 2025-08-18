@@ -25,7 +25,7 @@ return {
       sources = { 'filesystem', 'git_status' },
     },
     keys = {
-      { '<leader>sf', '<cmd>Neotree<CR>', desc = 'File Tree' },
+      { '<leader>f', '<cmd>Neotree<CR>', desc = 'File Tree' },
     },
   },
 
