@@ -46,4 +46,12 @@ return {
     event = 'BufEnter',
     opts = {},
   },
+
+  {
+    'miversen33/sunglasses.nvim',
+    event = 'UIEnter',
+    opts = {
+      filter_percent = 0.15,
+    },
+  },
 }
