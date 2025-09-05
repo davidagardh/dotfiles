@@ -134,5 +134,12 @@ return {
       end,
       desc = 'Marks',
     },
+    {
+      '<leader>ss',
+      function()
+        Snacks.picker.pickers()
+      end,
+      desc = 'Marks',
+    },
   },
 }
