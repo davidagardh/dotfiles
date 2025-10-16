@@ -6,6 +6,7 @@
 	signingkey = 81AC97CE115333D6!
 [alias]
 	fix = "!f() { COMMIT=$(git log -n 50 --pretty=format:'%h %s' --no-merges | fzf --no-sort | cut -c -7); git commit --fixup=$COMMIT && GIT_SEQUENCE_EDITOR=true git rebase -i --autostash --autosquash $COMMIT^; }; f"
+	goback = "!f() { POINT=$(git reflog -n 50 --pretty=format:'%h %gs' | fzf --no-sort | cut -c -7); git reset --hard $POINT; }; f"
 	pushf = push --force-with-lease
 	oops = commit --amend --no-edit
 [merge]
