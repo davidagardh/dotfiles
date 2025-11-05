@@ -56,7 +56,7 @@
       - qrencode
       - ripgrep
       - rust
-      - texlive-bibtex
+      - texlive-scheme-medium
       - tldr
       - tmux
       - wl-clipboard
