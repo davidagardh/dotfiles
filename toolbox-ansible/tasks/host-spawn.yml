@@ -5,15 +5,15 @@
     state: link
   loop:
     - { src: ansible }
-    - { src: ansible-playbook }
     - { src: ansible-galaxy }
-    - { src: podman }
+    - { src: ansible-playbook }
+    - { src: bootc }
     - { src: buildah}
     - { src: flatpak }
-    - { src: xdg-open }
-    - { src: rpm-ostree }
     - { src: ostree }
+    - { src: podman }
+    - { src: rpm-ostree }
     - { src: systemctl }
-    - { src: bootc }
     - { src: tmux }
+    - { src: xdg-open }
 

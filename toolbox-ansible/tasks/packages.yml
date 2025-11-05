@@ -26,40 +26,40 @@
 - name: Install packages
   package:
     name:
-      - gh
-      - fzf
-      - python3-pip
-      - gnome-tweaks
-      - java-21-openjdk-devel
-      - zsh
-      - neovim
-      - go
-      - yt-dlp
-      - tmux
-      - poppler-utils
-      - g++
-      - pinentry-curses
-      - julia
-      - glab
-      - wl-clipboard
-      - pdftk-java
-      - texlive-bibtex
-      - latexmk
-      - ocrmypdf
-      - pdfgrep
-      - rust
       - cargo
-      - luarocks
-      - ripgrep
-      - fd-find
-      - host-spawn
-      - gmp-devel
-      - ncurses-compat-libs
-      - tldr
-      - htop
       - chromium
       - clang
+      - fd-find
+      - fzf
+      - g++
+      - gh
+      - glab
+      - gmp-devel
+      - gnome-tweaks
+      - go
       - gtk3-devel
+      - host-spawn
+      - htop
+      - java-21-openjdk-devel
+      - julia
+      - latexmk
+      - luarocks
+      - ncurses-compat-libs
+      - neovim
       - ninja-build
+      - ocrmypdf
+      - pdfgrep
+      - pdftk-java
+      - pinentry-curses
+      - poppler-utils
+      - python3-pip
       - qrencode
+      - ripgrep
+      - rust
+      - texlive-bibtex
+      - tldr
+      - tmux
+      - wl-clipboard
+      - yt-dlp
+      - zsh
     state: latest
