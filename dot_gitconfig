@@ -9,6 +9,7 @@
 	goback = "!f() { POINT=$(git reflog -n 50 --pretty=format:'%h %gs' | fzf --no-sort | cut -c -7); git reset --hard $POINT; }; f"
 	pushf = push --force-with-lease
 	oops = commit --amend --no-edit
+	wt-setup = config --add remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 [merge]
 	conflictStyle = zdiff3
 [rebase]
