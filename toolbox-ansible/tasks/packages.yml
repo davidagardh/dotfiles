@@ -51,6 +51,7 @@
       - pdfgrep
       - pdftk-java
       - pinentry-curses
+      - podman-compose
       - poppler-utils
       - python3-pip
       - qrencode
