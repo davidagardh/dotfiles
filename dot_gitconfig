@@ -30,8 +30,9 @@
 	prune = true
 [diff]
 	colorMoved = zebra
-[credential]
-	helper = "!f() { /var/home/david/.vscode-server/bin/0f0d87fa9e96c856c5212fc86db137ac0d783365/node /tmp/vscode-remote-containers-14e8eed0-260a-4e0d-98e5-43988d41e5ce.js git-credential-helper $*; }; f"
+# for VSCode credential helper
+[includeIf "gitdir:/workspaces/"]
+    path = ~/.gitconfig-vscode
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
