@@ -6,7 +6,15 @@ return {
       'mason-org/mason.nvim',
     },
     config = function()
-      vim.lsp.enable { 'lua_ls', 'gopls', 'html', 'cssls', 'jedi_language_server', 'ts_ls' }
+      vim.lsp.enable {
+        'cssls',
+        'gopls',
+        'html',
+        'jedi_language_server',
+        'lua_ls',
+        'ts_ls',
+        'yamlls',
+      }
     end,
   },
 
