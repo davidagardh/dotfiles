@@ -9,7 +9,7 @@ local configs = {
   'javascript',
   'lua',
   'markdown',
-  'markdown-inline',
+  'markdown_inline',
   'python',
   'query',
   'regex',
