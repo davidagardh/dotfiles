@@ -135,11 +135,18 @@ return {
       desc = 'Marks',
     },
     {
+      '<leader>sk',
+      function()
+        Snacks.picker.keymaps()
+      end,
+      desc = 'keymaps',
+    },
+    {
       '<leader>ss',
       function()
         Snacks.picker.pickers()
       end,
-      desc = 'Marks',
+      desc = 'Pickers',
     },
   },
 }
