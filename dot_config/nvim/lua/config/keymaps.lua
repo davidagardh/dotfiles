@@ -4,6 +4,7 @@ local function map(lhs, rhs, desc, mode)
   vim.keymap.set(mode, lhs, rhs, { desc = desc })
 end
 
+--vim.keymap.del('n', '<backspace>')
 map('<esc>', '<cmd>nohlsearch<CR>')
 map('+', '"+', '', { 'n', 'x' })
 map('<leader>a', '<C-^>', 'Alternate File')

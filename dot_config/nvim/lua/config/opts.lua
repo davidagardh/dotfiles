@@ -1,5 +1,7 @@
 vim.g.mapleader = ' '
 
+vim.o.conceallevel = 2
+vim.o.concealcursor = 'nv'
 vim.o.shell = 'fish'
 vim.o.number = true
 vim.o.relativenumber = true
