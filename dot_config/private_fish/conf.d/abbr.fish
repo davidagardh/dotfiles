@@ -19,3 +19,6 @@ abbr --add gd "git diff"
 abbr --add cz "chezmoi"
 abbr --add czapp "chezmoi apply"
 
+abbr --add occ "oc config current-context"
+abbr --add ocsw "oc config use-context"
+
