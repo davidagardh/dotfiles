@@ -7,6 +7,7 @@ return {
     },
     config = function()
       vim.lsp.enable {
+        'svelte',
         'cssls',
         'gopls',
         'html',
