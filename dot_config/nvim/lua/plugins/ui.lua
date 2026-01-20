@@ -44,7 +44,21 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     event = 'BufEnter',
-    opts = {},
+    dependencies = {
+      'bwpge/lualine-pretty-path',
+    },
+    opts = {
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff', 'diagnostics' },
+        lualine_c = {
+          { 'pretty_path', unnamed = '', directories = { enable = true, max_depth = 5 } },
+        },
+        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' },
+      },
+    },
   },
 
   {
