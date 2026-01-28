@@ -8,19 +8,19 @@ return {
     config = function()
       vim.lsp.enable {
         'svelte',
-        'cssls',
+        'cssls', --Mason css-lsp
         'gopls',
         'html',
         'jedi_language_server',
-        'lua_ls',
-        'ts_ls',
-        'yamlls',
+        'lua_ls', --Mason lua-language-server
+        'ts_ls', --Mason typescript-language-server
+        'yamlls', --Mason yaml-language-server
       }
       vim.lsp.config('yamlls', {
         settings = {
           yaml = {
             schemas = {
-              kubernetes = 'okd/**/*',
+              kubernetes = { 'okd/**/*', 'kubernetes/**/*' },
             },
             validate = true,
             hover = true,
@@ -76,8 +76,8 @@ return {
         lua = { 'stylua' },
         python = { 'black' },
         html = { 'prettier' },
-        typescript = { 'prettier' },
-        javascript = { 'prettier' },
+        typescript = { 'prettierd' },
+        javascript = { 'prettierd' },
       },
       format_on_save = function(bufnr)
         local disable_filetypes = { c = true, cpp = true }
