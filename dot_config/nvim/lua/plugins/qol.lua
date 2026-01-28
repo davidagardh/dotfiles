@@ -21,7 +21,7 @@ return {
     },
   },
   {
-    'ggandor/leap.nvim',
+    'https://codeberg.org/andyg/leap.nvim',
     -- leap is itself lazy
     lazy = false,
     config = function()
