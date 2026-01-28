@@ -63,7 +63,7 @@ return {
       ['core.defaults'] = {},
       ['core.dirman'] = {
         config = {
-          workspaces = { notes = '~/Documents/neo' },
+          workspaces = { notes = '~/Nextcloud/neo' },
           default_workspace = 'notes',
         },
       },
