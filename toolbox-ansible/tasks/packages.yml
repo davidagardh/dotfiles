@@ -24,13 +24,14 @@
     allowerasing: true
 
 - name: Install packages
-  package:
+  dnf:
     name:
       - cargo
       - chromium
       - clang
       - compat-lua
       - fd-find
+      - fish
       - fzf
       - g++
       - gh
@@ -42,6 +43,7 @@
       - host-spawn
       - htop
       - java-21-openjdk-devel
+      - jq
       - julia
       - latexmk
       - luarocks
