@@ -38,6 +38,7 @@
       - glab
       - gmp-devel
       - gnome-tweaks
+      - gnupg2-scdaemon
       - go
       - gtk3-devel
       - host-spawn
