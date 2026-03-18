@@ -3,7 +3,7 @@
 [user]
 	name = David Agardh
 	email = agardh.david@gmail.com
-	signingkey = 2C7D3FF29F2B05EA!
+	signingkey = ~/.ssh/id_git
 [alias]
 	fix = "!f() { COMMIT=$(git log -n 50 --pretty=format:'%h %s' --no-merges | fzf --no-sort | cut -c -7); git commit --fixup=$COMMIT && GIT_SEQUENCE_EDITOR=true git rebase -i --autostash --autosquash $COMMIT^; }; f"
 	goback = "!f() { POINT=$(git reflog -n 50 --pretty=format:'%h %gs' | fzf --no-sort | cut -c -7); git reset --hard $POINT; }; f"
@@ -26,6 +26,8 @@
 	autoSetupRemote = true
 [commit]
 	gpgsign = true
+[gpg]
+	format = ssh
 [fetch]
 	prune = true
 [diff]
