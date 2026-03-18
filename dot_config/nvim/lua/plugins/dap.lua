@@ -63,6 +63,29 @@ return {
       dap.listeners.after.event_initialized['dapui_config'] = dapui.open
       dap.listeners.before.event_terminated['dapui_config'] = dapui.close
       dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+      local mason = vim.env.MASON or (vim.fn.stdpath 'data' .. '/mason')
+      local lua_extension = mason .. '/share/local-lua-debugger-vscode'
+      local lua_debugger = lua_extension .. '/extension/debugAdapter.js'
+      dap.adapters['local-lua'] = {
+        type = 'executable',
+        command = 'node',
+        args = { lua_debugger },
+      }
+      dap.configurations.lua = {
+        {
+          type = 'local-lua',
+          request = 'launch',
+          name = 'Launch current file (Lua)',
+          extensionPath = lua_extension,
+          cwd = '${workspaceFolder}',
+          program = {
+            lua = 'lua',
+            file = '${file}',
+          },
+          args = {},
+        },
+      }
     end,
   },
 }
