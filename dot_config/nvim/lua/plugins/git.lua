@@ -31,6 +31,8 @@ return {
         end, 'Reset Hunk', 'v')
 
         map('<leader>hd', gs.diffthis, 'Hunk Diff')
+
+        map('<leader>hb', gs.blame_line, 'Blame line')
       end,
     },
   },

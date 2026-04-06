@@ -19,9 +19,6 @@ return {
       vim.lsp.config('yamlls', {
         settings = {
           yaml = {
-            schemas = {
-              kubernetes = { 'okd/**/*', 'kubernetes/**/*' },
-            },
             validate = true,
             hover = true,
             completion = true,
