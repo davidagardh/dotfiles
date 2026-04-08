@@ -66,5 +66,6 @@
       - tmux
       - wl-clipboard
       - yt-dlp
+      - zoxide
       - zsh
     state: latest
