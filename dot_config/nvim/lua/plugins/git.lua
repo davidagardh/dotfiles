@@ -33,6 +33,8 @@ return {
         map('<leader>hd', gs.diffthis, 'Hunk Diff')
 
         map('<leader>hb', gs.blame_line, 'Blame line')
+
+        map('<leader>ht', gs.toggle_current_line_blame, 'Toggle Blame')
       end,
     },
   },
