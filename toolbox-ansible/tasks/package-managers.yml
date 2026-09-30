@@ -2,6 +2,7 @@
   community.general.cargo:
     name:
       - stylua
+      - typst-cli
     state: present
 
 - name: Packages for pip

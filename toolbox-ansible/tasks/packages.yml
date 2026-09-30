@@ -53,9 +53,11 @@
       - neovim
       - ninja-build
       - ocrmypdf
+      - openssl-devel
       - pdfgrep
       - pdftk-java
       - pinentry-curses
+      - pkgconf-pkg-config
       - podman-compose
       - poppler-utils
       - python3-pip
