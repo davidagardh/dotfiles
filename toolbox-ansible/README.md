@@ -9,13 +9,19 @@ This ansible playbook sets up a default fedora-toolbox container with all the pa
 
 ## Use
 
-´´´
-> toolbox create
-> echo "[toolbox]\nfedora-toolbox-41 ansible_connection=podman" | sudo tee /etc/ansible/hosts
-´´´
+Create the container, point ansible at it and run the playbook. To move to a new major Fedora version, first remove the old container with `distrobox rm toolbx`.
+
+```sh
+distrobox create --pull --name toolbx --image registry.fedoraproject.org/fedora-toolbox:latest
+printf '[toolbox]\ntoolbx ansible_connection=podman\n' | sudo tee /etc/ansible/hosts
+ansible-playbook run.yml
+systemctl --user enable --now toolbx-update.timer
+```
+
+The timer reruns the playbook weekly to keep the container's packages up to date.
 
 ## Problems
 
-You might need to install the podman connection from ansible galaxy, but I have never needed to. If so, that's ´ansible-galaxy collection install containers.podman´
+You might need to install the podman connection from ansible galaxy, but I have never needed to. If so, that's `ansible-galaxy collection install containers.podman`
 
-For first run might need you to install libdnf inside the toolbx. ´toolbox run sudo dnf install -y python-libdnf´
+For first run might need you to install libdnf inside the toolbx. `distrobox enter toolbx -- sudo dnf install -y python-libdnf`

@@ -1,0 +1,5 @@
+# Machine-local git config, not synced by chezmoi.
+#
+# The shared config lives in ~/.config/git/config. Anything that runs
+# `git config --global` (VS Code, git-lfs, gh auth setup-git, ...) writes
+# here instead, so it never conflicts with the dotfiles repo.

@@ -43,7 +43,7 @@
       - gtk3-devel
       - host-spawn
       - htop
-      - java-21-openjdk-devel
+      - java-latest-openjdk-devel
       - jq
       - julia
       - just

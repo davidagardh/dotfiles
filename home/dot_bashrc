@@ -1,0 +1,113 @@
+# ~/.bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# PATH. Directories that don't exist are skipped, and nothing is added twice
+# when one bash starts another.
+path_prepend() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="$1:$PATH"
+    fi
+}
+path_append() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="$PATH:$1"
+    fi
+}
+
+path_prepend "$HOME/bin"
+path_prepend "$HOME/.local/bin"
+path_append "$HOME/.local/share/coursier/bin"
+path_append "$HOME/.cargo/bin"
+
+if command -v go > /dev/null; then
+    export GOPATH="$HOME/Development/go"
+    path_prepend "$GOPATH/bin"
+fi
+
+unset -f path_prepend path_append
+export PATH
+
+if command -v nvim > /dev/null; then
+    export EDITOR=nvim
+fi
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+if [ -f ~/.config/op/plugins.sh ]; then
+    source ~/.config/op/plugins.sh
+fi
+
+# Machine-specific config that isn't synced
+if [ -d ~/.bashrc.d ]; then
+    for rc in ~/.bashrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+    unset rc
+fi
+
+# Everything below is only for interactive shells
+[[ $- == *i* ]] || return
+
+# Shortcuts
+alias cl="clear"
+alias l="ls -l"
+alias la="ls -lA"
+
+alias cz="chezmoi"
+alias czadd="chezmoi add"
+alias czapp="chezmoi apply"
+
+cdtmp() {
+	cd "$(mktemp -d)"
+}
+
+function cdl() {
+	cd $1
+	ls
+}
+
+# Git
+alias gs="git status"
+alias gu="git restore --staged"
+alias gsu="git stash && git pull && git stash pop"
+alias gd="git diff"
+alias ga="git add"
+alias gcm="git commit -m"
+alias gcam="git commit -am"
+alias gp="git pull"
+alias gP="git fetch && git push"
+alias gl="git log --oneline --graph"
+alias gsw="git switch"
+alias gb="git -P branch"
+alias gba="git -P branch -a"
+
+mvr() {
+	# Reverse mv
+	mv $2 $1
+}
+
+system-upgrade() {
+	rpm-ostree upgrade
+	flatpak upgrade -y
+	distrobox enter toolbx -- sudo dnf upgrade -y
+}
+
+les() {
+  if [[ -f "$1" ]]; then
+    cat "$1"
+  else
+    ls "$1"
+  fi
+}
+
+# Misc.
+alias yubi-switch='gpg-connect-agent "scd serialno" "learn --force" /bye'
+

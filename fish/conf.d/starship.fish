@@ -1,3 +1,5 @@
+status is-interactive; or exit
+
 if type -q starship
     starship init fish | source
 else

@@ -32,9 +32,6 @@
 	prune = true
 [diff]
 	colorMoved = zebra
-# for VSCode credential helper
-[includeIf "gitdir:/workspaces/"]
-    path = ~/.gitconfig-vscode
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true

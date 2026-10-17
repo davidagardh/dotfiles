@@ -1,1 +1,4 @@
 Session.vim
+
+# fish's universal variables. Machine-local state, not config.
+/fish/fish_variables

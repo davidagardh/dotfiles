@@ -1,0 +1,6 @@
+# ~/.bash_profile is only read by login shells. Keep everything in ~/.bashrc
+# so login and non-login shells behave the same.
+
+if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+fi
