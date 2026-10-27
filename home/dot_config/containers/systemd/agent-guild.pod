@@ -1,0 +1,31 @@
+[Unit]
+Description=Agent environment guild: pod and VPN
+# Keep retrying instead of giving up after systemd's default start limit.
+StartLimitIntervalSec=0
+
+[Pod]
+PodName=agent-guild
+Network=pasta
+UserNS=keep-id:uid=1000,gid=1000
+# Keep the pod up while the agent container restarts
+ExitPolicy=continue
+
+[Service]
+# Bring up wg0 once the pod's network namespace exists. A throwaway container
+# joins the pod as root with NET_ADMIN and nothing else, and gets the private
+# key as a podman secret (create it with agent-wg-key {{ .name }}). Nothing that
+# keeps running has either. The agent container starts after this succeeds.
+ExecStartPost=/usr/bin/podman run --rm --pod=agent-guild \
+    --user=0 --cap-drop=all --cap-add=NET_ADMIN \
+    --secret=agent-guild-wg-key,target=wg-private-key \
+    --env=WG_ADDRESS=192.168.3.7 \
+    --env=WG_PEER_PUBLIC_KEY=qpAtoeW+R40qUBcpvKkjupITtDyiXtlKTS36QhSvxiM= \
+    --env=WG_PEER_ENDPOINT=ekebo.agardhekeby.se:51820 \
+    --env=WG_ALLOWED_IPS=192.168.3.0/24 \
+    --env=WG_MTU=1420 \
+    localhost/agent-box:latest agent-wg-up
+Restart=on-failure
+RestartSec=30
+# The first start pulls a multi-gigabyte image.
+TimeoutStartSec=900
+

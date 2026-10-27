@@ -1,0 +1,51 @@
+#!/bin/bash
+# Bring up wg0 in the current network namespace: an agent environment's pod.
+#
+# Run once per pod start by the pod's Quadlet (ExecStartPost), as root with
+# NET_ADMIN only, in a throwaway container that joins the pod. The agent
+# container never gets NET_ADMIN or the private key, so agents can't change
+# the tunnel, the routes or the environment's VPN identity.
+#
+# Settings come from the environment:
+#   WG_ADDRESS          this environment's VPN address with prefix, e.g. 10.8.0.21/24
+#   WG_PEER_PUBLIC_KEY  the VPN hub's public key
+#   WG_PEER_ENDPOINT    the hub's host:port, as your other devices use it
+#   WG_ALLOWED_IPS      comma-separated VPN networks to route through wg0
+#   WG_MTU              optional, default 1420
+#   WG_KEEPALIVE        optional, default 25 (keeps the NAT mapping open)
+#   WG_PRIVATE_KEY_FILE optional, default /run/secrets/wg-private-key
+#
+# The MTU is set explicitly on purpose: wg-quick would derive it from the
+# pod's pasta interface (65520), far above what the path to the hub carries.
+set -euo pipefail
+
+: "${WG_ADDRESS:?WG_ADDRESS is not set}"
+: "${WG_PEER_PUBLIC_KEY:?WG_PEER_PUBLIC_KEY is not set}"
+: "${WG_PEER_ENDPOINT:?WG_PEER_ENDPOINT is not set}"
+: "${WG_ALLOWED_IPS:?WG_ALLOWED_IPS is not set}"
+key_file=${WG_PRIVATE_KEY_FILE:-/run/secrets/wg-private-key}
+
+if [[ ! -r $key_file ]]; then
+  echo "agent-wg-up: no private key at $key_file (run agent-wg-key on the host)" >&2
+  exit 1
+fi
+
+ip link delete wg0 2>/dev/null || true
+ip link add wg0 type wireguard
+wg set wg0 \
+  private-key "$key_file" \
+  peer "$WG_PEER_PUBLIC_KEY" \
+    endpoint "$WG_PEER_ENDPOINT" \
+    allowed-ips "$WG_ALLOWED_IPS" \
+    persistent-keepalive "${WG_KEEPALIVE:-25}"
+ip address add "$WG_ADDRESS" dev wg0
+ip link set wg0 mtu "${WG_MTU:-1420}" up
+
+IFS=',' read -r -a networks <<< "$WG_ALLOWED_IPS"
+for net in "${networks[@]}"; do
+  ip route replace "${net// /}" dev wg0
+done
+
+echo "agent-wg-up: wg0 is up at $WG_ADDRESS, routing $WG_ALLOWED_IPS"
+wg show wg0 | grep -v 'private key'
+

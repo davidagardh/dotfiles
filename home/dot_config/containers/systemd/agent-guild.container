@@ -1,0 +1,48 @@
+[Unit]
+Description=Agent environment guild: T3 Code server
+StartLimitIntervalSec=0
+
+[Container]
+ContainerName=agent-guild
+Image=localhost/agent-box:latest
+AutoUpdate=registry
+# network and user namespace comes from pod
+Pod=agent-guild.pod
+# A small init as PID 1 passes stop signals on to T3 and reaps processes.
+RunInit=true
+# Mount your home directories without relabelling them.
+# Also needed for nested podman.
+SecurityLabelDisable=true
+AddDevice=/dev/fuse
+# TODO maybe needed /dev/net/tun to create networks
+
+Environment=T3CODE_HOST=192.168.3.7
+Environment=T3CODE_PORT=3773
+Environment=T3CODE_HOME=/var/home/david/agents/guild/t3
+
+# ~ for the agent. Holds config and secrets.
+Volume=/var/home/david/agents/guild/home:/home/agent
+# T3 home. Should be same path as on host.
+Volume=/var/home/david/agents/guild/t3:/var/home/david/agents/guild/t3
+# Git repos. Should be same path as on host.
+Volume=/var/home/david/Development/cpu:/var/home/david/Development/cpu
+# Data for nested containers can be controlled or wiped separately.
+Volume=agent-guild-containers:/home/agent/.local/share/containers
+
+HealthCmd=curl -sS -o /dev/null http://{{ $ip }}:{{ $port }}/
+HealthInterval=1m
+HealthStartPeriod=2m
+Notify=healthy
+
+[Service]
+# TODO maybe ExecStartPre to create directories if missing
+Restart=always
+RestartSec=15
+# The first start pulls a multi-gigabyte image.
+TimeoutStartSec=900
+# Agents yield to whatever you are doing on the desktop.
+CPUWeight=50
+IOWeight=50
+
+[Install]
+WantedBy=default.target
