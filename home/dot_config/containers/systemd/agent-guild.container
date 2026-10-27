@@ -16,7 +16,7 @@ SecurityLabelDisable=true
 AddDevice=/dev/fuse
 # TODO maybe needed /dev/net/tun to create networks
 
-Environment=T3CODE_HOST=192.168.3.7
+Environment=T3CODE_HOST=::
 Environment=T3CODE_PORT=3773
 Environment=T3CODE_HOME=/var/home/david/agents/guild/t3
 

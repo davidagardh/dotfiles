@@ -8,6 +8,7 @@
 #
 # Settings come from the environment:
 #   WG_ADDRESS          this environment's VPN address with prefix, e.g. 10.8.0.21/24
+#   WG_ADDRESS_IPV6     optional, extra IPv6 address with prefix
 #   WG_PEER_PUBLIC_KEY  the VPN hub's public key
 #   WG_PEER_ENDPOINT    the hub's host:port, as your other devices use it
 #   WG_ALLOWED_IPS      comma-separated VPN networks to route through wg0
@@ -39,6 +40,11 @@ wg set wg0 \
     allowed-ips "$WG_ALLOWED_IPS" \
     persistent-keepalive "${WG_KEEPALIVE:-25}"
 ip address add "$WG_ADDRESS" dev wg0
+
+if [[ -n "${WG_ADDRESS_IPV6:-}" ]]; then
+  ip address add "$WG_ADDRESS_IPV6" dev wg0
+fi
+
 ip link set wg0 mtu "${WG_MTU:-1420}" up
 
 IFS=',' read -r -a networks <<< "$WG_ALLOWED_IPS"

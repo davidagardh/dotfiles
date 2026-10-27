@@ -5,7 +5,7 @@ StartLimitIntervalSec=0
 
 [Pod]
 PodName=agent-guild
-Network=pasta
+Network=pasta:--ipv4-only
 UserNS=keep-id:uid=1000,gid=1000
 # Keep the pod up while the agent container restarts
 ExitPolicy=continue
@@ -18,10 +18,11 @@ ExitPolicy=continue
 ExecStartPost=/usr/bin/podman run --rm --pod=agent-guild \
     --user=0 --cap-drop=all --cap-add=NET_ADMIN \
     --secret=agent-guild-wg-key,target=wg-private-key \
-    --env=WG_ADDRESS=192.168.3.7 \
+    --env=WG_ADDRESS=192.168.3.7/32 \
+    --env=WG_ADDRESS_IPV6=2a00:1598:61b7:7710::7/64 \
     --env=WG_PEER_PUBLIC_KEY=qpAtoeW+R40qUBcpvKkjupITtDyiXtlKTS36QhSvxiM= \
     --env=WG_PEER_ENDPOINT=ekebo.agardhekeby.se:51820 \
-    --env=WG_ALLOWED_IPS=192.168.3.0/24 \
+    --env=WG_ALLOWED_IPS=192.168.3.0/24,::/0 \
     --env=WG_MTU=1420 \
     localhost/agent-box:latest agent-wg-up
 Restart=on-failure
