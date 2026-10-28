@@ -3,7 +3,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 WORKDIR /tmp
 
 RUN dnf -y install --setopt=install_weak_deps=False \
-        bash-completion bind-utils ca-certificates curl diffutils file findutils \
+        bash-completion bind-utils ca-certificates curl diffutils file findutils man man-pages \
         fish gnupg2 gzip iproute iputils less nmap-ncat patch procps-ng rsync \
         tar tmux tree unzip which xz zip \
         git git-lfs gh openssh-clients \
