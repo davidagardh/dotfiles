@@ -33,7 +33,8 @@ jobs:
         with:
           context: agent-box
           containerfiles: Containerfile
-          tags: agent-box:latest
+          image: agent-box
+          tags: latest
 
       - name: Push to quay
         id: push-to-quay
