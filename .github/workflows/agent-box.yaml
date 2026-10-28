@@ -3,7 +3,7 @@
 # Needs QUAY_USERNAME and QUAY_PASSWORD secrets with write access to
 # quay.io/davidagardh/agent-box.
 
-name: Build agent base image
+name: Build agent-box image
 
 on:
   schedule:

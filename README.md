@@ -16,6 +16,7 @@ This repo is managed using [chezmoi](https://www.chezmoi.io/). It only depends o
 | `nvim/` | Neovim config | `~/.config/nvim` is a symlink to it |
 | `fish/` | fish config | `~/.config/fish` is a symlink to it |
 | `toolbox-ansible/` | Ansible playbook for the `toolbx` container | A weekly systemd timer from `home/dot_config/systemd` |
+| `agent-box/` | Contanerfiles to build isolated environments for AI agents | Built by github actions, used by quadlets in `home/dot_config/containers/systemd` |
 
 ## Day-to-day use
 
