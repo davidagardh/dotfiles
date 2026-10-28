@@ -12,7 +12,7 @@ RUN dnf -y install --setopt=install_weak_deps=False \
         nodejs npm \
         golang cargo rust \
         ansible-core helm \
-        podman buildah fuse-overlayfs crun shadow-utils \
+        podman podman-compose buildah fuse-overlayfs crun shadow-utils \
         wireguard-tools \
  && dnf clean all
 
@@ -26,11 +26,11 @@ RUN fetch_oc() { \
       rm -f "${file}"; \
     }; \
     fetch_oc "4.22.0-okd-scos.10" /usr/local/bin; \
-    fetch_oc "4.19.0-okd-scos.19" /tmp/oc-guild; \
-    install -m 0755 /tmp/oc-guild/oc /usr/local/bin/oc-guild; \
-    rm -rf /tmp/oc-guild; \
+    fetch_oc "4.19.0-okd-scos.19" /tmp/oc-dsek; \
+    install -m 0755 /tmp/oc-dsek/oc /usr/local/bin/oc-dsek; \
+    rm -rf /tmp/oc-dsek; \
     oc version --client; \
-    oc-guild version --client
+    oc-dsek version --client
 
 # kubeconform, for validating kubernetes manifests
 RUN base="https://github.com/yannh/kubeconform/releases/download/v0.8.0"; \
