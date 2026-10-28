@@ -1,5 +1,5 @@
 {{- /*
-	Take as aguments a dict with:
+	Takes as argument a dict with:
 		name   - name of this environment. Will be used like agent-<name>.
 		agents - [data.agents] table from chezmoi.toml
 */ -}}

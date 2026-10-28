@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=localhost/agent-base:latest
+ARG BASE_IMAGE=quay.io/davidagardh/agent-box:base
 FROM ${BASE_IMAGE}
 
 SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
