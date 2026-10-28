@@ -1,6 +1,6 @@
 # Builds the agent-box image once per day.
 #
-# Needs QUAY_USERNAME and QUAY_PASSWORD secrets with write access to
+# Needs QUAY_USER and QUAY_PASSWORD secrets with write access to
 # quay.io/davidagardh/agent-box.
 
 name: Build agent-box image
@@ -42,8 +42,8 @@ jobs:
           registry: quay.io/davidagardh
           image: ${{ steps.build-image.outputs.image }}
           tags: ${{ steps.build-image.outputs.tags }}
-          username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_TOKEN }}
+          username: ${{ secrets.QUAY_USER }}
+          password: ${{ secrets.QUAY_PASSWORD }}
 
       - name: Print image url
         run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
