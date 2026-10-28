@@ -1,0 +1,73 @@
+FROM registry.fedoraproject.org/fedora:latest
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+WORKDIR /tmp
+
+RUN dnf -y install --setopt=install_weak_deps=False \
+        bash-completion bind-utils ca-certificates curl diffutils file findutils \
+        fish gnupg2 gzip iproute iputils less nmap-ncat patch procps-ng rsync \
+        tar tmux tree unzip which xz zip \
+        git git-lfs gh openssh-clients \
+        ripgrep fd-find jq yq just shellcheck neovim \
+        gcc gcc-c++ make python3 python3-pip \
+        nodejs npm \
+        golang cargo rust \
+        ansible-core helm \
+        podman podman-compose buildah fuse-overlayfs crun shadow-utils \
+        wireguard-tools \
+ && dnf clean all
+
+RUN fetch_oc() { \
+      base="https://github.com/okd-project/okd/releases/download/$1"; \
+      file="openshift-client-linux-$1.tar.gz"; \
+      curl -fsSLO "${base}/${file}"; \
+      curl -fsSL "${base}/sha256sum.txt" | grep " ${file}\$" | sha256sum -c -; \
+      mkdir -p "$2"; \
+      tar -xzf "${file}" -C "$2" oc kubectl; \
+      rm -f "${file}"; \
+    }; \
+    fetch_oc "4.22.0-okd-scos.10" /usr/local/bin; \
+    fetch_oc "4.19.0-okd-scos.19" /tmp/oc-dsek; \
+    install -m 0755 /tmp/oc-dsek/oc /usr/local/bin/oc-dsek; \
+    rm -rf /tmp/oc-dsek; \
+    oc version --client; \
+    oc-dsek version --client
+
+# kubeconform, for validating kubernetes manifests
+RUN base="https://github.com/yannh/kubeconform/releases/download/v0.8.0"; \
+    file="kubeconform-linux-amd64.tar.gz"; \
+    curl -fsSLO "${base}/${file}"; \
+    curl -fsSL "${base}/CHECKSUMS" | grep " ${file}\$" | sha256sum -c -; \
+    tar -xzf "${file}" -C /usr/local/bin kubeconform; \
+    rm -f "${file}"; \
+    kubeconform -v
+
+# Nested rootless podman, following quay.io/podman/stable.
+COPY files/containers.conf /etc/containers/containers.conf
+RUN sed -e 's|^#mount_program|mount_program|g' \
+        -e 's|^mountopt[[:space:]]*=.*$|mountopt = "nodev,fsync=0"|g' \
+        /usr/share/containers/storage.conf > /etc/containers/storage.conf
+
+# Script run by init container to start wg0.
+# NET_ADMIN needed for container running this.
+COPY --chmod=0755 files/agent-wg-up /usr/local/bin/agent-wg-up
+
+# The container user. The pod maps your host user onto uid 1000, so files
+# written to bind mounts stay owned by you. The subordinate ID ranges let
+# nested podman work inside the outer user namespace.
+
+# Your uid should be mapped to uid 1000 inside the container
+RUN useradd --uid 1000 --user-group --create-home --home-dir /home/agent \
+        --shell /bin/bash agent \
+ && printf 'agent:1:999\nagent:1001:64535\n' > /etc/subuid \
+ && printf 'agent:1:999\nagent:1001:64535\n' > /etc/subgid
+
+ENV HOME=/home/agent \
+    PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/agent/.local/bin:/home/agent/go/bin:/home/agent/.cargo/bin \
+    NPM_CONFIG_PREFIX=/home/agent/.local \
+    PIP_USER=1 \
+    _CONTAINERS_USERNS_CONFIGURED="" \
+    BUILDAH_ISOLATION=chroot
+
+USER 1000:1000
+WORKDIR /home/agent
+CMD ["bash", "-l"]

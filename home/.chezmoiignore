@@ -1,0 +1,8 @@
+{{- /*
+	Environments that don't have [data.agents] don't get agent-boxes.
+*/ -}}
+{{- $agents := get . "agents" -}}
+{{- if not $agents }}
+.config/containers/systemd/agent-*
+{{- end }}
+

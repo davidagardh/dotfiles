@@ -1,0 +1,49 @@
+# Builds the agent-box image once per day.
+#
+# Needs QUAY_USERNAME and QUAY_PASSWORD secrets with write access to
+# quay.io/davidagardh/agent-box.
+
+name: Build agent base image
+
+on:
+  schedule:
+    # Every day at 06:17 UTC.
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: agent-box
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build and push agent-box image
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Build image
+        id: build-image
+        uses: redhat-actions/buildah-build@v3
+        with:
+          context: agent-box
+          containerfiles: Containerfile
+          tags: agent-box:latest
+
+      - name: Push to quay
+        id: push-to-quay
+        uses: redhat-actions/push-to-registry@v3
+        with:
+          registry: quay.io/davidagardh
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_TOKEN }}
+
+      - name: Print image url
+        run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"

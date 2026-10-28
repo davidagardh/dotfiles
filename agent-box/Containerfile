@@ -1,0 +1,28 @@
+ARG BASE_IMAGE=quay.io/davidagardh/agent-box:base
+FROM ${BASE_IMAGE}
+
+SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
+
+USER 0:0
+
+# T3 Code server and OpenCode, installed globally under /usr/local.
+RUN set -eu; \
+	HOME=/root NPM_CONFIG_PREFIX=/usr/local npm install --global --no-fund --no-audit \
+		"t3@latest" "@opencode/cli@latest"; \
+	HOME=/root npm cache clean --force; \
+	rm -rf /root/.npm /root/.cache
+
+RUN mkdir -p /usr/share/agent-box; \
+	{ \
+		echo "t3 $(t3 --version)"; \
+		echo "opencode $(opencode --version)"; \
+	} | tee /usr/share/agent-box/versions
+
+ENV T3CODE_NO_BROWSER=true \
+    T3CODE_TELEMETRY_ENABLED=true
+
+USER 1000:1000
+WORKDIR /home/agent
+
+# T3CODE_HOST, T3CODE_PORT and T3CODE_HOME set at runtime
+CMD ["t3", "serve"]
