@@ -68,6 +68,8 @@ ENV HOME=/home/agent \
     _CONTAINERS_USERNS_CONFIGURED="" \
     BUILDAH_ISOLATION=chroot
 
+RUN rm -rf /tmp/* /tmp/.[!.]* /tmp/..?*
+
 USER 1000:1000
 WORKDIR /home/agent
 CMD ["bash", "-l"]

@@ -12,11 +12,14 @@ RUN set -eu; \
 	HOME=/root npm cache clean --force; \
 	rm -rf /root/.npm /root/.cache
 
-RUN mkdir -p /usr/share/agent-box; \
+RUN set -eu; \
+	export HOME=/var/tmp/build-home; \
+	mkdir -p "$HOME" /usr/share/agent-box; \
 	{ \
 		echo "t3 $(t3 --version)"; \
 		echo "opencode $(opencode --version)"; \
-	} | tee /usr/share/agent-box/versions
+	} | tee /usr/share/agent-box/versions; \
+	rm -rf /tmp/* /tmp/.[!.]* /tmp/..?* /var/tmp/build-home
 
 ENV T3CODE_NO_BROWSER=true \
     T3CODE_TELEMETRY_ENABLED=true
