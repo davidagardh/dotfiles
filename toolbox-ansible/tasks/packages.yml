@@ -64,6 +64,7 @@
       - qrencode
       - ripgrep
       - rust
+      - rustfmt
       - shellcheck
       - texlive-scheme-medium
       - tldr

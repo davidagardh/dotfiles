@@ -15,6 +15,7 @@ return {
         'jedi_language_server',
         'prettierd', --Mason prettired
         'lua_ls', --Mason lua-language-server
+        'rust_analyzer', --Mason rust-analyzer
         'ts_ls', --Mason typescript-language-server
         'yamlls', --Mason yaml-language-server
       }
