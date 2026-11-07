@@ -9,3 +9,36 @@
   pip:
     name:
       - pynvim
+
+- name: Create the nvm directory
+  ansible.builtin.file:
+    path: "{{ nvm_dir }}"
+    state: directory
+    mode: "0755"
+  become_user: "{{ nvm_user }}"
+
+- name: Install nvm
+  ansible.builtin.unarchive:
+    src: "https://github.com/nvm-sh/nvm/archive/refs/tags/{{ nvm_version }}.tar.gz"
+    dest: "{{ nvm_dir }}"
+    remote_src: true
+    extra_opts:
+      - --strip-components=1
+    creates: "{{ nvm_dir }}/nvm.sh"
+  become_user: "{{ nvm_user }}"
+
+# Pin the default alias to the concrete version instead of "lts/*" so fish
+# can find the Node bin directory without running nvm at startup.
+- name: Install the latest Node LTS
+  ansible.builtin.shell: |
+    set -e
+    unset NPM_CONFIG_PREFIX
+    . "{{ nvm_dir }}/nvm.sh"
+    nvm install --lts
+    nvm alias default "$(nvm current)"
+  args:
+    executable: /bin/bash
+    creates: "{{ nvm_dir }}/alias/default"
+  become_user: "{{ nvm_user }}"
+  environment:
+    NVM_DIR: "{{ nvm_dir }}"

@@ -34,6 +34,7 @@ I use [fish](https://fishshell.com/) with the [starship](https://starship.rs/) p
 
 - `fish/conf.d/*.fish` runs at every startup, in alphabetical order. Use one file per topic.
 - `fish/functions/<name>.fish` holds one function per file. Each one loads the first time it's called. `funced <name>` and then `funcsave <name>` writes the file for you.
+- `nvm` and the latest Node LTS are installed per user by the toolbox playbook. `fish/functions/nvm.fish` runs the bash nvm and copies the selected Node version back into fish.
 
 bash and vim have small configs for machines that don't have fish and Neovim.
 
