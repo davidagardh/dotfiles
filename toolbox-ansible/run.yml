@@ -1,9 +1,5 @@
 ---
 - hosts: toolbox
-  vars:
-    nvm_user: "{{ lookup('env', 'USER') }}"
-    nvm_dir: "{{ lookup('env', 'HOME') }}/.config/nvm"
-    nvm_version: v0.41.0
   tasks:
     - import_tasks: tasks/packages.yml
     - import_tasks: tasks/package-managers.yml

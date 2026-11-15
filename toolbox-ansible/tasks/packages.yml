@@ -52,12 +52,14 @@
       - ncurses-compat-libs
       - neovim
       - ninja-build
+      - nodejs
       - ocrmypdf
       - openssl-devel
       - pdfgrep
       - pdftk-java
       - pinentry-curses
       - pkgconf-pkg-config
+      - pnpm
       - podman-compose
       - poppler-utils
       - python3-pip
