@@ -11,7 +11,7 @@ RUN dnf -y install --setopt=install_weak_deps=False \
         gcc gcc-c++ make python3 python3-pip \
         nodejs npm \
         golang cargo rust \
-        ansible-core helm \
+        ansible-core helm python3-openstackclient \
         podman podman-compose buildah fuse-overlayfs crun shadow-utils \
         wireguard-tools \
  && dnf clean all
