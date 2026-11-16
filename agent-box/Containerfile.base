@@ -6,7 +6,7 @@ RUN dnf -y install --setopt=install_weak_deps=False \
         bash-completion bind-utils ca-certificates curl diffutils file findutils man man-pages \
         fish gnupg2 gzip iproute iputils less nmap-ncat patch procps-ng rsync \
         tar tmux tree unzip which xz zip \
-        git git-lfs gh openssh-clients \
+        git git-lfs gh glab openssh-clients \
         ripgrep fd-find jq yq just shellcheck neovim \
         gcc gcc-c++ make python3 python3-pip \
         nodejs npm \
