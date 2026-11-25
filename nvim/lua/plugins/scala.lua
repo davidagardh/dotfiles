@@ -1,6 +1,8 @@
 return {
   'scalameta/nvim-metals',
-  ft = { 'scala', 'sbt', 'java' },
+  -- Java is handled by plugins/java.lua (nvim-jdtls). If that file is removed
+  -- and Metals should cover Java files again, add 'java' back here.
+  ft = { 'scala', 'sbt' },
   opts = function()
     local metals_config = require('metals').bare_config()
     metals_config.on_attach = function(client, bufnr)
