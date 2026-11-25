@@ -52,9 +52,9 @@ don't both start.
 
 The first time a Java file is opened, Mason installs `jdtls`,
 `java-debug-adapter`, and `java-test` automatically. This needs a JDK on
-`PATH` (`java-latest-openjdk-devel` from the playbook is fine). Maven and
-Gradle projects work out of the box; jdtls uses its embedded build tool
-support.
+`PATH` (`java-latest-openjdk-devel` from the playbook is fine). Maven, Gradle,
+and plain Eclipse projects (`.classpath` + `.project`, source in `src/`, classes
+in `bin/`) work out of the box; jdtls uses its embedded build tool support.
 
 | Key | Action |
 | --- | --- |
@@ -62,6 +62,7 @@ support.
 | `<leader>b` | Toggle breakpoint |
 | `<F1>` / `<F2>` / `<F3>` | Step into / over / out |
 | `<F7>` | Toggle the debug UI (variables, stack, breakpoints, REPL) |
+| `<leader>ja` | Launch the current main class with program arguments |
 | `<leader>jt` | Debug the test method under the cursor |
 | `<leader>jT` | Debug the test class |
 | `<leader>jp` | Pick a test to debug |
@@ -71,6 +72,32 @@ support.
 | `<leader>jf` | Drop to frame (restart the current frame) |
 | `<leader>jw` | Add/watch an expression |
 | `<leader>js` | Run SpotBugs and load findings into quickfix |
+
+For programs with `main(String[] args)`, open the source file and use
+`<leader>ja` (or `:JavaLaunch`). It launches the main class in that file and
+prompts for the arguments. With the course examples: from `fib.java` enter `5`;
+from `InsertionSorter.java` enter `12 5 9 3 2 25 8 19 200 10`. Arguments can
+also be given on the command line, for example `:JavaLaunch 5` or
+`:JavaLaunch 12 5 9 3 2 25 8 19 200 10`.
+
+A `.vscode/launch.json` in the project is the persistent alternative; nvim-dap
+reads it when you press `<F5>`:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "InsertionSorter test case",
+      "request": "launch",
+      "mainClass": "InsertionSorter",
+      "args": "12 5 9 3 2 25 8 19 200 10",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
+```
 
 The debug UI (`<F7>`) also supports the Eclipse-style interactions directly:
 

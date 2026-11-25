@@ -123,6 +123,8 @@ local root_markers = {
   'settings.gradle',
   'settings.gradle.kts',
   'build.xml',
+  '.classpath',
+  '.project',
   '.git',
 }
 
@@ -146,6 +148,12 @@ local function spotbugs_properties(root)
       classDirPath = { 'build/classes/java/main' },
       testSourceDirPath = { 'src/test/java' },
       testClassDirPath = { 'build/classes/java/test' },
+    }
+  end
+  if vim.fn.filereadable(root .. '/.classpath') == 1 then
+    return {
+      sourceDirPath = { 'src' },
+      classDirPath = { 'bin' },
     }
   end
 end
@@ -182,6 +190,57 @@ local function run_spotbugs(bufnr)
     vim.cmd 'copen'
     vim.notify(('SpotBugs: %d finding(s)'):format(findings), vim.log.levels.WARN)
   end
+end
+
+--- Launch one of the project's main classes and prompt for program arguments.
+--- @param bufnr integer
+--- @param program_args? string Arguments to pass; prompted for when nil.
+local function launch_java(bufnr, program_args)
+  local function start(config)
+    if program_args == nil then
+      program_args = vim.fn.input 'Program arguments: '
+    end
+    if program_args ~= '' then
+      config.args = program_args
+    end
+    config.cwd = config.cwd or project_root(bufnr)
+    config.console = config.console or 'integratedTerminal'
+    require('dap').run(config)
+  end
+
+  require('jdtls.dap').fetch_main_configs({}, function(configs)
+    local current_class = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':t:r')
+    local current
+    for _, config in ipairs(configs) do
+      if config.mainClass == current_class or vim.endswith(config.mainClass, '.' .. current_class) then
+        current = config
+        break
+      end
+    end
+
+    if current then
+      start(current)
+    elseif #configs == 1 then
+      start(configs[1])
+    elseif #configs > 1 then
+      vim.ui.select(configs, {
+        prompt = 'Main class:',
+        format_item = function(config)
+          return config.name
+        end,
+      }, function(choice)
+        if choice then
+          start(choice)
+        end
+      end)
+    else
+      local main_class = vim.fn.input('Main class: ', current_class)
+      if main_class == '' then
+        return
+      end
+      start { type = 'java', request = 'launch', name = 'Launch ' .. main_class, mainClass = main_class }
+    end
+  end)
 end
 
 local function java_config(bufnr)
@@ -242,10 +301,16 @@ local function java_config(bufnr)
       map('<leader>js', function()
         run_spotbugs(b)
       end, 'Java: Run SpotBugs')
+      map('<leader>ja', function()
+        launch_java(b)
+      end, 'Java: Launch main with arguments')
 
       vim.api.nvim_buf_create_user_command(b, 'JavaSpotBugs', function()
         run_spotbugs(b)
       end, { desc = 'Run SpotBugs and show findings in the quickfix list' })
+      vim.api.nvim_buf_create_user_command(b, 'JavaLaunch', function(opts)
+        launch_java(b, #opts.fargs > 0 and table.concat(opts.fargs, ' ') or nil)
+      end, { nargs = '*', desc = 'Launch a main class with program arguments' })
     end,
   }
 end
